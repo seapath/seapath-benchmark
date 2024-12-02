@@ -1,0 +1,21 @@
+# Copyright (C) 2024 Savoir-faire Linux, Inc.
+# SPDX-License-Identifier: Apache-2.0
+---
+- name: Run {{ test_profile_name }} benchmark
+  shell:
+    cmd: >-
+      phoronix-test-suite batch-benchmark "{{ test_profile_name }}"
+- name: Get test results dir name
+  shell:
+    cmd: >-
+      ls -t /var/lib/phoronix-test-suite/test-results|head -n1
+  register: test_results_name
+- name: Generate {{ test_profile_name }} test results PDF
+  shell:
+    cmd: >-
+      phoronix-test-suite result-file-to-pdf {{ test_results_name.stdout }}
+- name: Fetch {{ test_profile_name }} PDF result file
+  fetch:
+    flat: true
+    src: /root/{{ test_results_name.stdout }}.pdf
+    dest: ../{{ test_profile_name }}_results.pdf
