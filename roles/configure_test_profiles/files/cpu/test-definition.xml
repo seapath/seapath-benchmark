@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--Phoronix Test Suite v10.8.4-->
+<PhoronixTestSuite>
+  <TestInformation>
+    <Title>CPU</Title>
+    <AppVersion>1.0.0</AppVersion>
+    <Description>This is a CPU benchmark to measure CPU performance, using sysbench.</Description>
+    <ResultScale>Events Per Second</ResultScale>
+    <Proportion>HIB</Proportion>
+    <TimesToRun>1</TimesToRun>
+  </TestInformation>
+  <TestProfile>
+    <Version>1.0.0</Version>
+    <SupportedPlatforms>Linux</SupportedPlatforms>
+    <SoftwareType>Utility</SoftwareType>
+    <TestType>System</TestType>
+    <License>Free</License>
+    <Status>Verified</Status>
+    <EnvironmentSize>0.01</EnvironmentSize>
+    <Maintainer>Savoir-faire Linux</Maintainer>
+  </TestProfile>
+</PhoronixTestSuite>

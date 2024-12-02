@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--Phoronix Test Suite v10.2.2-->
+<PhoronixTestSuite>
+  <ResultsParser>
+    <OutputTemplate>    events per second: $_RESULT_#</OutputTemplate>
+    <ResultScale>Events Per Second</ResultScale>
+  </ResultsParser>
+  <ResultsParser>
+    <OutputTemplate>         min: #_RESULT_# MiB/sec)</OutputTemplate>
+    <LineHint>ms</LineHint>
+    <ResultScale>ms</ResultScale>
+  </ResultsParser>
+</PhoronixTestSuite>
