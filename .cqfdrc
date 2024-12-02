@@ -1,0 +1,13 @@
+[project]
+org='seapath'
+name='seapath-benchmark'
+
+[build]
+command='check_yaml'
+flavors='configure_benchmark run_benchmark'
+
+[configure_benchmark]
+command='ansible-playbook -i inventories/example.yaml playbooks/configure_benchmark.yaml'
+
+[run_benchmark]
+command='ansible-playbook -i inventories/example.yaml playbooks/run_benchmark.yaml'

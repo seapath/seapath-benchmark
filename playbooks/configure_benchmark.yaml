@@ -1,0 +1,13 @@
+# Copyright (C) 2024 Savoir-faire Linux, Inc.
+# SPDX-License-Identifier: Apache-2.0
+---
+- name: Prepare hypervisor and VMs
+  become: true
+  hosts:
+    - hypervisors
+    - VMs
+  tasks:
+    - name: Copy phoronix configuration file
+      copy:
+        src: ../files/configuration/phoronix-test-suite.xml
+        dest: /etc/phoronix-test-suite.xml

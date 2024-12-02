@@ -1,0 +1,4 @@
+*.pdf
+inventories/*.yaml
+.vscode/
+tests_results*/
