@@ -75,8 +75,9 @@
     - name: Fetch process-monitoring results file
       fetch:
         flat: true
-        src: /tmp/result
+        src: /tmp/results
         dest: ../tests_results/{{ansible_hostname}}_result
+      when: "'process-monitoring' in monitoring | default([])"
 - name: Execute last tasks on localhost
   hosts:
     localhost
