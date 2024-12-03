@@ -1,6 +1,15 @@
 # Copyright (C) 2024 Savoir-faire Linux, Inc.
 # SPDX-License-Identifier: Apache-2.0
 ---
+- name: Check {{ test_profile_name }} benchmark previous failed installation
+  stat:
+    path: /var/lib/phoronix-test-suite/installed-tests/local/{{ test_profile_name }}/install-failed.log
+  register: previous_install_failed
+- name: Clean installation directory
+  file:
+    state: absent
+    path: /var/lib/phoronix-test-suite/installed-tests/local/{{ test_profile_name }}/install-failed.log
+  when: previous_install_failed.stat.exists
 - name: Copy {{ test_profile_name }} test profile
   copy:
     src: "{{ test_profile_name }}"
