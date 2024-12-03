@@ -1,0 +1,19 @@
+# Copyright (C) 2024 Savoir-faire Linux, Inc.
+# SPDX-License-Identifier: Apache-2.0
+---
+- name: Copy {{ test_profile_name }} test profile
+  copy:
+    src: "{{ test_profile_name }}"
+    dest: /var/lib/phoronix-test-suite/test-profiles/local/
+- name: Install {{ test_profile_name }} benchmark
+  shell:
+    cmd: >-
+      phoronix-test-suite batch-install {{ test_profile_name }}
+- name: Check {{ test_profile_name }} benchmark installation
+  stat:
+    path: /var/lib/phoronix-test-suite/installed-tests/local/{{ test_profile_name }}/install-failed.log
+  register: install_failed
+- name: Fail if {{ test_profile_name }} benchmark installation failed
+  fail:
+    msg: "{{ test_profile_name }} benchmark installation did not succeed. Check full error in {{ install_failed.stat.path }}"
+  when: install_failed.stat.exists

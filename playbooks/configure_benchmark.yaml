@@ -11,3 +11,17 @@
       copy:
         src: ../files/configuration/phoronix-test-suite.xml
         dest: /etc/phoronix-test-suite.xml
+    - name: Configure monitoring test-profiles
+      include_role:
+        name: "configure_test_profiles"
+      vars:
+        test_profile_name: "{{ item }}"
+      loop: "{{ monitoring }}"
+      when: monitoring is defined
+    - name: Configure benchmark test-profiles
+      include_role:
+        name: "configure_test_profiles"
+      vars:
+        test_profile_name: "{{ item }}"
+      loop: "{{ benchmark }}"
+      when: benchmark is defined
