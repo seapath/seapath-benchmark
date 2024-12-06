@@ -1,0 +1,87 @@
+# Copyright (C) 2024 Savoir-faire Linux, Inc.
+# SPDX-License-Identifier: Apache-2.0
+---
+- name: Prepare localhost
+  hosts:
+    localhost
+  tasks:
+    - name: Create tests results directory
+      file:
+        path: ../tests_results
+        state: directory
+- name: Start benchmark on the hypervisors
+  become: true
+  hosts:
+    - hypervisors
+  tasks:
+    - name: Run monitoring test-profiles
+      include_role:
+        name: "run_monitoring_tests_profiles"
+      vars:
+        test_profile_name: "{{ item }}"
+      loop: "{{ monitoring }}"
+      when: monitoring is defined
+
+- name: Start benchmark on the hypervisors
+  become: true
+  hosts:
+    - hypervisors
+  tasks:
+    - name: Run test-profiles
+      include_role:
+        name: "run_benchmark_test_profiles"
+      vars:
+        test_profile_name: "{{ item }}"
+      loop: "{{ benchmark }}"
+      when: benchmark is defined
+- name: Start benchmark on the VMs
+  become: true
+  hosts:
+    - VMs
+  tasks:
+    - name: Run test-profiles
+      include_role:
+        name: "run_test_profiles"
+      vars:
+        test_profile_name: "{{ item }}"
+      loop: "{{ benchmark }}"
+      when: benchmark is defined
+- name: End benchmark on hypervisor
+  become: true
+  hosts:
+    - hypervisors
+  tasks:
+    - name: End up benchmark
+      shell:
+        cmd: >-
+          touch /tmp/stop_waiting
+    - name: Ensure phoronix have finished his work
+      ansible.builtin.wait_for:
+        timeout: 10
+    - name: Get test results dir name
+      shell:
+        cmd: >-
+          ls -t /var/lib/phoronix-test-suite/test-results|head -n1
+      register: test_results_name
+    - name: Generate test results PDF
+      shell:
+        cmd: >-
+          phoronix-test-suite result-file-to-pdf {{ test_results_name.stdout }}
+    - name: Fetch PDF result file
+      fetch:
+        flat: true
+        src: /root/{{ test_results_name.stdout }}.pdf
+        dest: ../tests_results/hyp_results.pdf
+    - name: Fetch process-monitoring results file
+      fetch:
+        flat: true
+        src: /tmp/result
+        dest: ../tests_results/{{ansible_hostname}}_result
+- name: Execute last tasks on localhost
+  hosts:
+    localhost
+  tasks:
+    - name: Rename test results directory
+      shell:
+        cmd: >-
+          mv ../tests_results ../tests_results-$(date +%F_%Hh%Mm%S)
