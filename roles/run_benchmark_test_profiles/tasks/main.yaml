@@ -18,4 +18,4 @@
   fetch:
     flat: true
     src: /root/{{ test_results_name.stdout }}.pdf
-    dest: ../{{ test_profile_name }}_results.pdf
+    dest: ../tests_results/{{ test_profile_name }}_results.pdf
