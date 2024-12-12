@@ -47,16 +47,23 @@ generate_results() {
     mv "\${RESULT}.sorted" "\$RESULT"
 
 }
-rm -f "\$TRIGGER_FILE"
+
+clean() {
+    rm -f "\$TRIGGER_FILE"
+    rm -rf "\$LOG"
+    rm -rf "\$RESULT"
+}
+
+clean
 touch /tmp/results
 ITERATION=0
 
 while true; do
     if [[ -f "\$TRIGGER_FILE" ]]; then
         generate_results
-        rm -f "\$TRIGGER_FILE"
         mv "\$RESULT" /tmp/results
         echo "Result: PASS" > "\$LOG_FILE"
+        clean
         exit 0
     fi
 
