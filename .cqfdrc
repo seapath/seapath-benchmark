@@ -4,12 +4,10 @@ name='seapath-benchmark'
 
 [build]
 command='check_yaml'
-flavors='configure_test_profiles run_benchmark'
+flavors='configure_test_profiles run_test_profiles'
 
 [configure_test_profiles]
 command='ansible-playbook -i inventories/minisforum.yaml playbooks/configure_test_profiles.yaml'
 
+[run_test_profiles]
 command='ansible-playbook -i inventories/example.yaml playbooks/run_test_profiles.yaml'
-
-[run_benchmark]
-command='ansible-playbook -i inventories/example.yaml playbooks/run_benchmark.yaml'
