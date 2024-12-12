@@ -1,0 +1,38 @@
+# Copyright (C) 2024 Savoir-faire Linux, Inc.
+# SPDX-License-Identifier: Apache-2.0
+---
+- name: End up benchmark
+  file:
+    path: /tmp/stop_waiting
+    state: touch
+- name: Ensure phoronix have finished his work
+  shell: >
+    while pgrep -x phoronix > /dev/null; do
+      sleep 1;
+    done
+  register: process_check
+  changed_when: false
+  failed_when: false
+- name: Get test results dir name
+  shell:
+    cmd: >-
+      ls -t /var/lib/phoronix-test-suite/test-results|head -n1
+  register: test_results_name
+- name: Generate XML pie charts data
+  shell:
+    cmd: >-
+      generate_pie_chart /tmp/results /var/lib/phoronix-test-suite/test-results/{{ test_results_name.stdout }}/composite.xml
+- name: Generate test results PDF
+  shell:
+    cmd: >-
+      phoronix-test-suite result-file-to-html {{ test_results_name.stdout }}
+- name: Fetch HTML result file
+  fetch:
+    flat: true
+    src: /root/{{ test_results_name.stdout }}.html
+    dest: ../tests_results/hyp_{{ansible_hostname}}_results.html
+- name: Fetch process-monitoring results file
+  fetch:
+    flat: true
+    src: /tmp/results
+    dest: ../tests_results/{{ansible_hostname}}_result

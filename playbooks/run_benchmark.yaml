@@ -46,38 +46,19 @@
         test_profile_name: "{{ item }}"
       loop: "{{ benchmark }}"
       when: benchmark is defined
-- name: End benchmark on hypervisor
+- name: End monitoring on hypervisors ans VMs
   become: true
   hosts:
+    - VMs
     - hypervisors
   tasks:
-    - name: End up benchmark
-      shell:
-        cmd: >-
-          touch /tmp/stop_waiting
-    - name: Ensure phoronix have finished his work
-      ansible.builtin.wait_for:
-        timeout: 10
-    - name: Get test results dir name
-      shell:
-        cmd: >-
-          ls -t /var/lib/phoronix-test-suite/test-results|head -n1
-      register: test_results_name
-    - name: Generate test results PDF
-      shell:
-        cmd: >-
-          phoronix-test-suite result-file-to-pdf {{ test_results_name.stdout }}
-    - name: Fetch PDF result file
-      fetch:
-        flat: true
-        src: /root/{{ test_results_name.stdout }}.pdf
-        dest: ../tests_results/hyp_results.pdf
-    - name: Fetch process-monitoring results file
-      fetch:
-        flat: true
-        src: /tmp/results
-        dest: ../tests_results/{{ansible_hostname}}_result
-      when: "'process-monitoring' in monitoring | default([])"
+  - name: Generate monitoring test-profiles results
+    include_role:
+      name: "get_monitoring_test_results"
+    vars:
+      test_profile_name: "{{ item }}"
+    loop: "{{ monitoring }}"
+    when: monitoring is defined
 - name: Execute last tasks on localhost
   hosts:
     localhost
