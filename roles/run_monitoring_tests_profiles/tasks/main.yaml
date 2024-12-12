@@ -4,6 +4,8 @@
 - name: Start {{ test_profile_name }} monitoring
   shell:
     cmd: >-
-      MONITOR=all phoronix-test-suite batch-benchmark "{{ test_profile_name }}"
+      phoronix-test-suite batch-benchmark {{ test_profile_name }}
   async: 9999999
   poll: 0
+- name: Run needed custom task for {{ test_profile_name }}
+  import_tasks: "{{ test_profile_name }}.yaml"
