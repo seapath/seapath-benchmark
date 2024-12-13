@@ -22,7 +22,7 @@
   </TestProfile>
   <TestSettings>
     <Default>
-      <Arguments>5</Arguments>
+      <Arguments>guest0 2</Arguments>
     </Default>
     </TestSettings>
 </PhoronixTestSuite>
