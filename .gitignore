@@ -1,4 +1,5 @@
 *.pdf
 inventories/*.yaml
+!inventories/inventory_example.yaml
 .vscode/
 tests_results*/

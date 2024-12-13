@@ -1,0 +1,45 @@
+all:
+    children:
+        all:
+            ansible_connection: ssh
+            ansible_ssh_private_key_file: ~/.ssh/my-ssh-key
+            ansible_ssh_common_args: '-o StrictHostKeyChecking=no -o IdentitiesOnly=yes'
+            ansible_python_interpreter: /usr/bin/python3
+        hypervisors:
+            hosts:
+                hypervisor1:
+                    # Ansible var
+                    ansible_host: 192.168.1.125
+                    ansible_user: root
+                    admin_user: admin
+
+                    # seapath-benchmark var
+                    monitoring: # Put here the monitoring test-profiles to be run
+                        - process-monitoring
+                    benchmark: # Put here the benchmark test-profiles to be run
+                        - disk
+                        - cpu
+                        - vm-migration
+                hypervisor2:
+                    # Ansible var
+                    ansible_host: 192.168.1.126
+                    ansible_user: root
+                    admin_user: admin
+
+                    # seapath-benchmark var
+                    monitoring: # Put here the monitoring test-profiles to be run
+                        - process-monitoring
+                    benchmark: # Put here the benchmark test-profiles to be run
+                        - disk
+                        - vm-migration
+        VMs:
+            hosts:
+                vm1:
+                    ansible_host: 192.168.1.127
+                    ansible_user: root
+                    # seapath-benchmark var
+                    monitoring: # Put here the monitoring test-profiles to be run
+                        - process-monitoring
+                    benchmark: # Put here the benchmark test-profiles to be run
+                        - disk
+                        - vm-migration
