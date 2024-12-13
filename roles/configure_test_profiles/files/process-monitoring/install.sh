@@ -7,7 +7,7 @@
 
 echo "#!/bin/bash
 TRIGGER_FILE=/tmp/stop_waiting
-LOG=\$(mktemp)
+LOG=/tmp/log
 RESULT=\$(mktemp)
 
 generate_results() {
