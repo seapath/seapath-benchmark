@@ -22,26 +22,15 @@
       loop: "{{ monitoring }}"
       when: monitoring is defined
 
-- name: Start benchmark on the hypervisors
+- name: Start benchmark on the hypervisors and VMs
   become: true
   hosts:
     - hypervisors
-  tasks:
-    - name: Run test-profiles
-      include_role:
-        name: "run_benchmark_test_profiles"
-      vars:
-        test_profile_name: "{{ item }}"
-      loop: "{{ benchmark }}"
-      when: benchmark is defined
-- name: Start benchmark on the VMs
-  become: true
-  hosts:
     - VMs
   tasks:
     - name: Run test-profiles
       include_role:
-        name: "run_test_profiles"
+        name: "run_benchmark_test_profiles"
       vars:
         test_profile_name: "{{ item }}"
       loop: "{{ benchmark }}"
