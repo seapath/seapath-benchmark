@@ -33,7 +33,7 @@ generate_results() {
 for ((i=0; i<MIGRATION_ITERATIONS; i++)); do
     start_migration=\$(date +%s)
     crm resource move \$RESOURCE force
-    RESOURCE_STATUS=\$(crm resource status|grep guest0|awk '{print \$4}')
+    RESOURCE_STATUS=\$(crm resource status|grep \$RESOURCE|awk '{print \$4}')
 
     while [ "\$RESOURCE_STATUS" != "Started" ]
     do
