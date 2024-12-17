@@ -22,7 +22,8 @@
   </TestProfile>
   <TestSettings>
     <Default>
-      <Arguments>ssc600example 25</Arguments>
+      {% set vm_migration = benchmark | selectattr('vm_migration', 'defined') | first %}
+      <Arguments>{{ vm_migration.vm_migration.resource|default("guest0") }} {{ vm_migration.vm_migration.iterations |default("2")}}</Arguments>
     </Default>
-    </TestSettings>
+  </TestSettings>
 </PhoronixTestSuite>

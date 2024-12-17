@@ -54,12 +54,12 @@ called `test profiles`. Test profiles can be one of two types:
   performance of a particular system or SEAPATH components (ex: CPU,
   memory, disk, VM migration...)
 
-| Name | Test profiles type | Tested components |Compatible machines and infrastructure | Generated results |
-| -------- | ------- |------- | ------- |------- |
-| cpu | Benchmark | CPU |Hypervisor and VMs, all SEAPATH configuration | PDF report with sysbench score |
-| disk | Benchmark | Disk |Hypervisor and VMs, all SEAPATH configuration | PDF report with fio score |
-| vm_migration | Benchmark | CPU, disk    |Hypervisor and VMs, only SEAPATH cluster configuration | PDF report with average VM migration time |
-| process-monitoring | Monitoring    | /    |Hypervisor and VMs, all SEAPATH configuration | HTML report with process CPU consumption per CPU core |
+| Name | Test profiles type | Tested components | Compatible machines and infrastructure | Test arguments | Generated results |
+| -------- | ------- | ------- | ------- | ------- | ------- |
+| cpu | Benchmark | CPU | Hypervisor and VMs, all SEAPATH configuration | / | PDF report with sysbench score |
+| disk | Benchmark | Disk | Hypervisor and VMs, all SEAPATH configuration | / | PDF report with fio score |
+| vm_migration | Benchmark | CPU, disk | Hypervisor and VMs, only SEAPATH cluster configuration |- `resource`: name of the VM to migrate (default `guest0`) <br> - `iterations`: number of VM migration (default 5) | PDF report with average VM migration time |
+| process-monitoring | Monitoring | / | Hypervisor and VMs, all SEAPATH configuration | / | HTML report with process CPU consumption per CPU core |
 
 
 

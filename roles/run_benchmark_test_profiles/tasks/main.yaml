@@ -1,6 +1,9 @@
 # Copyright (C) 2024 Savoir-faire Linux, Inc.
 # SPDX-License-Identifier: Apache-2.0
 ---
+- name: Set test profile variable
+  set_fact:
+    test_profile: "{{ (test_profile_name | list | first if test_profile_name is not string else test_profile_name) | trim }}"
 - name: Run {{ test_profile_name }} benchmark
   shell:
     cmd: >-
