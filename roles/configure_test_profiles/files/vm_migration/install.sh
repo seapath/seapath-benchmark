@@ -47,5 +47,5 @@ done
 
 generate_results
 
-" > ~/vm-migration
-chmod +x ~/vm-migration
+" > ~/vm_migration
+chmod +x ~/vm_migration

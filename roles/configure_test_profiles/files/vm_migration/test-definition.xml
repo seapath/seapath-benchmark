@@ -22,7 +22,7 @@
   </TestProfile>
   <TestSettings>
     <Default>
-      <Arguments>guest0 2</Arguments>
+      <Arguments>ssc600example 25</Arguments>
     </Default>
     </TestSettings>
 </PhoronixTestSuite>
