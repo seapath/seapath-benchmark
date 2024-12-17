@@ -19,7 +19,7 @@ all:
                     benchmark: # Put here the benchmark test-profiles to be run
                         - disk
                         - cpu
-                        - vm-migration
+                        - vm_migration
                 hypervisor2:
                     # Ansible var
                     ansible_host: 192.168.1.126
@@ -31,7 +31,7 @@ all:
                         - process-monitoring
                     benchmark: # Put here the benchmark test-profiles to be run
                         - disk
-                        - vm-migration
+                        - vm_migration
         VMs:
             hosts:
                 vm1:
@@ -42,4 +42,4 @@ all:
                         - process-monitoring
                     benchmark: # Put here the benchmark test-profiles to be run
                         - disk
-                        - vm-migration
+                        - vm_migration

@@ -58,7 +58,7 @@ called `test profiles`. Test profiles can be one of two types:
 | -------- | ------- |------- | ------- |------- |
 | cpu | Benchmark | CPU |Hypervisor and VMs, all SEAPATH configuration | PDF report with sysbench score |
 | disk | Benchmark | Disk |Hypervisor and VMs, all SEAPATH configuration | PDF report with fio score |
-| vm-migration | Benchmark | CPU, disk    |Hypervisor and VMs, only SEAPATH cluster configuration | PDF report with average VM migration time |
+| vm_migration | Benchmark | CPU, disk    |Hypervisor and VMs, only SEAPATH cluster configuration | PDF report with average VM migration time |
 | process-monitoring | Monitoring    | /    |Hypervisor and VMs, all SEAPATH configuration | HTML report with process CPU consumption per CPU core |
 
 
@@ -132,6 +132,6 @@ cqfd run ansible-playbook -i inventories/<YOUR INVENTORY> playbooks/run_test_pro
 ### Version v0.1
 
 * Configuration of the machines and the test profiles
-* Add CPU, disk, vm-migration benchmark test profiles
+* Add CPU, disk, vm_migration benchmark test profiles
 * Add process-monitoring monitoring test profile
 * Generation of results per test-profiles
