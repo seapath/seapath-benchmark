@@ -72,8 +72,8 @@ while true; do
     sleep 1
 done
 
-" > ~/process-monitoring
-chmod +x ~/process-monitoring
+" > ~/process_monitoring
+chmod +x ~/process_monitoring
 
 # Check out the `phoronix-test-suite debug-run` command when trying to
 # debug your install/run behavior
