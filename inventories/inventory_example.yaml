@@ -15,7 +15,7 @@ all:
 
                     # seapath-benchmark var
                     monitoring: # Put here the monitoring test-profiles to be run
-                        - process-monitoring
+                        - process_monitoring
                     benchmark: # Put here the benchmark test-profiles to be run
                         - disk
                         - cpu
@@ -28,7 +28,7 @@ all:
 
                     # seapath-benchmark var
                     monitoring: # Put here the monitoring test-profiles to be run
-                        - process-monitoring
+                        - process_monitoring
                     benchmark: # Put here the benchmark test-profiles to be run
                         - disk
                         - vm_migration
@@ -39,7 +39,7 @@ all:
                     ansible_user: root
                     # seapath-benchmark var
                     monitoring: # Put here the monitoring test-profiles to be run
-                        - process-monitoring
+                        - process_monitoring
                     benchmark: # Put here the benchmark test-profiles to be run
                         - disk
                         - vm_migration
