@@ -17,9 +17,14 @@
         dest: /etc/topdefaultrc
     - name: Copy pie chart generation script
       copy:
-        src: ../files/generate_pie_chart.sh
-        dest: /usr/bin/generate_pie_chart
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
         mode: '0777'
+      loop:
+      - src: ../files/generate_pie_chart.sh
+        dest: /usr/bin/generate_pie_chart
+      - src: ../files/generate_pie_chart_xml.awk
+        dest: /usr/bin/generate_pie_chart_xml.awk
     - name: Configure monitoring test-profiles
       include_role:
         name: "configure_test_profiles"
