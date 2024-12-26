@@ -6,8 +6,13 @@
 
 echo "#!/bin/bash
 
-MIGRATION_ITERATIONS=\$2
+if [ -z \"\$1\" ] || [ -z \"\$2\" ]; then
+    echo \"Usage: \$0 <resource> <iterations>\"
+    exit 1
+fi
+
 RESOURCE=\$1
+MIGRATION_ITERATIONS=\$2
 RESULT=\$(mktemp)
 
 generate_results() {
