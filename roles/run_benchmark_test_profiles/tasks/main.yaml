@@ -3,7 +3,7 @@
 ---
 - name: Set test profile variable
   set_fact:
-    test_profile: "{{ (test_profile_name | list | first if test_profile_name is not string else test_profile_name) | trim }}"
+    test_profile_name: "{{ (test_profile | list | first if test_profile is not string else test_profile) | trim }}"
 - name: Run {{ test_profile_name }} benchmark
   shell:
     cmd: >-
