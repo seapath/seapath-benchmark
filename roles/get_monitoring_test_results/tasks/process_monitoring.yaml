@@ -18,10 +18,14 @@
     cmd: >-
       ls -t /var/lib/phoronix-test-suite/test-results|head -n1
   register: test_results_name
-- name: Generate XML pie charts data
+- name: Generate process_monitoring XML pie charts data
   shell:
     cmd: >-
-      generate_pie_chart /tmp/results /var/lib/phoronix-test-suite/test-results/{{ test_results_name.stdout }}/composite.xml
+      generate_pie_chart /tmp/results
+      /var/lib/phoronix-test-suite/test-results/{{ test_results_name.stdout }}/composite.xml
+      "{{ test_profile.process_monitoring.processes_to_monitor
+          if process_monitoring is not string and
+          test_profile.process_monitoring.processes_to_monitor is defined }}"
 - name: Generate test results PDF
   shell:
     cmd: >-
