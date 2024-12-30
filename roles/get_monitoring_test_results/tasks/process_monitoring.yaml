@@ -29,12 +29,12 @@
 - name: Generate test results PDF
   shell:
     cmd: >-
-      phoronix-test-suite result-file-to-html {{ test_results_name.stdout }}
-- name: Fetch HTML result file
+      phoronix-test-suite result-file-to-pdf {{ test_results_name.stdout }}
+- name: Fetch PDF result file
   fetch:
     flat: true
-    src: /root/{{ test_results_name.stdout }}.html
-    dest: ../tests_results/hyp_{{ansible_hostname}}_results.html
+    src: /root/{{ test_results_name.stdout }}.pdf
+    dest: ../tests_results/hyp_{{ansible_hostname}}_results.pdf
 - name: Fetch process_monitoring results file
   fetch:
     flat: true
