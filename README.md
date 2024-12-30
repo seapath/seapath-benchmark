@@ -97,6 +97,8 @@ Make sure the phoronix-test-suite package is installed on each tested machines:
 2. Unzip the archive
 3. Run the file `install.sh`
 
+To generate PDF reports, make sure the `rsvg-convert` package is installed.
+
 The user used by Ansible, targeted by inventory variable `ansible_user`
 variable must be configured on the publisher machine to have sudo access.
 
