@@ -7,6 +7,12 @@
     - hypervisors
     - VMs
   tasks:
+    - name: Include dependencies variables
+      include_vars:
+        file: "dependencies.yaml"
+    - name: Check needed dependencies
+      command: which {{ item }}
+      loop: "{{ dependencies }}"
     - name: Copy phoronix configuration file
       copy:
         src: ../files/configuration/phoronix-test-suite.xml
