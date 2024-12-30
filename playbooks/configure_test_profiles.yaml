@@ -10,9 +10,19 @@
     - name: Include dependencies variables
       include_vars:
         file: "dependencies.yaml"
+    - name: Include patches variables
+      include_vars:
+        file: "patches.yaml"
     - name: Check needed dependencies
       command: which {{ item }}
       loop: "{{ dependencies }}"
+    - name: Apply needed patches
+      patch:
+        src: "patches/{{ item.name }}"
+        dest: "{{ item.file }}"
+        ignore_whitespace: true
+      loop: "{{ patches }}"
+      when: patches is defined
     - name: Copy phoronix configuration file
       copy:
         src: ../files/configuration/phoronix-test-suite.xml

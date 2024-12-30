@@ -1,0 +1,13 @@
+diff --git a/pts-core/objects/pts_svg_dom_gd.php b/pts-core/objects/pts_svg_dom_gd.php
+index a91debdc7..e68396e1b 100644
+--- a/pts-core/objects/pts_svg_dom_gd.php
++++ b/pts-core/objects/pts_svg_dom_gd.php
+@@ -155,7 +155,7 @@ class pts_svg_dom_gd
+                                        imageantialias($gd, true);
+                                }
+                        }
+-                       else if(PTS_IS_CLIENT && pts_client::executable_in_path('rsvg-convert') && $format == 'PNG')
++                       if(PTS_IS_CLIENT && pts_client::executable_in_path('rsvg-convert') && $format == 'PNG')
+                        {
+                                // Using Inkscape for converting SVG to PNG generally means higher quality conversion
+                                $temp_svg = sys_get_temp_dir() . '/pts-temp-' . rand(0, 50000) . '.svg';
