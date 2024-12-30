@@ -9,10 +9,11 @@
       file:
         path: ../tests_results
         state: directory
-- name: Start benchmark on the hypervisors
+- name: Start monitoring on the hypervisors and VMs
   become: true
   hosts:
     - hypervisors
+    - VMs
   tasks:
     - name: Run monitoring test-profiles
       include_role:
