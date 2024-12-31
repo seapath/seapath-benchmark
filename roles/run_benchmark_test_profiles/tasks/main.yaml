@@ -4,21 +4,19 @@
 - name: Set test profile variable
   set_fact:
     test_profile_name: "{{ (test_profile | list | first if test_profile is not string else test_profile) | trim }}"
+- name: Set test-profile run identifier
+  set_fact:
+    test_run_id: "{{ test_profile_name | replace('_', '') }}-{{ test_start_time.stdout }}"
 - name: Run {{ test_profile_name }} benchmark
   shell:
     cmd: >-
-      phoronix-test-suite batch-benchmark "{{ test_profile_name }}"
-- name: Get test results dir name
-  shell:
-    cmd: >-
-      ls -t /var/lib/phoronix-test-suite/test-results|head -n1
-  register: test_results_name
+      TEST_RESULTS_NAME="{{ test_run_id }}" phoronix-test-suite batch-benchmark "{{ test_profile_name }}"
 - name: Generate {{ test_profile_name }} test results PDF
   shell:
     cmd: >-
-      phoronix-test-suite result-file-to-pdf {{ test_results_name.stdout }}
+      phoronix-test-suite result-file-to-pdf {{ test_run_id }}
 - name: Fetch {{ test_profile_name }} PDF result file
   fetch:
     flat: true
-    src: /root/{{ test_results_name.stdout }}.pdf
-    dest: ../tests_results/{{ test_profile_name }}_results.pdf
+    src: /root/{{ test_run_id }}.pdf
+    dest: ../tests_results/{{ test_run_id }}_results.pdf
