@@ -19,4 +19,4 @@
   fetch:
     flat: true
     src: /root/{{ test_run_id }}.pdf
-    dest: ../tests_results/{{ test_run_id }}_results.pdf
+    dest: ../tests_results/{{ansible_hostname}}_{{ test_run_id }}_results.pdf
