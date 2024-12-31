@@ -4,10 +4,13 @@
 - name: Set {{ test_profile }} test profile name variable
   set_fact:
     test_profile_name: "{{ (test_profile | list | first if test_profile is not string else test_profile) | trim }}"
+- name: Set test-profile run identifier
+  set_fact:
+    test_run_id: "{{ test_profile_name | replace('_', '') }}-{{ test_start_time.stdout }}"
 - name: Start {{ test_profile_name }} monitoring
   shell:
     cmd: >-
-      phoronix-test-suite batch-benchmark {{ test_profile_name }}
+      TEST_RESULTS_NAME="{{ test_run_id }}" phoronix-test-suite batch-benchmark {{ test_profile_name }}
   async: 9999999
   poll: 0
 - name: Run needed custom task for {{ test_profile_name }}

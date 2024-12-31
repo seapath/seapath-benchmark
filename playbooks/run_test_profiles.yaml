@@ -15,6 +15,11 @@
     - hypervisors
     - VMs
   tasks:
+    - name: Record test start time
+      shell:
+        cmd: >-
+          date +%F-%Hh%Mm%S
+      register: test_start_time
     - name: Run monitoring test-profiles
       include_role:
         name: "run_monitoring_tests_profiles"
