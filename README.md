@@ -137,3 +137,21 @@ cqfd run ansible-playbook -i inventories/<YOUR INVENTORY> playbooks/run_test_pro
 * Add CPU, disk, vm_migration benchmark test profiles
 * Add process_monitoring monitoring test profile
 * Generation of results per test-profiles
+
+### Version v0.2
+
+General:
+* Rename test profiles without '-' character
+* Add support for patching target files
+* Add packages dependency check
+* Various bug fixes and improvements
+
+Process_monitoring:
+* Generate report in PDF format, with the support of pie charts
+* Show only in the generated diagrams the 3 most CPU consuming
+  processes, other processes are in a category "Others"
+* Add a possibility to monitor only desired processes with
+  `processes_to_monitor` argument
+
+Vm_migration:
+* Add optional test-profiles arguments `resource` and `iterations`
