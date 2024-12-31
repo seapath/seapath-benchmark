@@ -28,10 +28,14 @@ all:
 
                     # seapath-benchmark var
                     monitoring: # Put here the monitoring test-profiles to be run
-                        - process_monitoring
+                        - process_monitoring:
+                            processes_to_monitor: qemu-system-x86,irq/63-eno3-tx-0
+
                     benchmark: # Put here the benchmark test-profiles to be run
                         - disk
-                        - vm_migration
+                        - vm_migration:
+                            resource: guest0
+                            iterations: 2
         VMs:
             hosts:
                 vm1:
