@@ -19,4 +19,20 @@
     <EnvironmentSize>0.01</EnvironmentSize>
     <Maintainer>Savoir-faire Linux</Maintainer>
   </TestProfile>
+  <TestSettings>
+    <Default>
+      <AllowCacheShare>TRUE</AllowCacheShare>
+    </Default>
+    <Option>
+      <DisplayName>Time to run</DisplayName>
+      <Identifier>time_to_run</Identifier>
+      <ArgumentPrefix>--runtime=</ArgumentPrefix>
+      <Menu>
+        <Entry>
+          <Name>Default</Name>
+          <Value>$time_to_run</Value>
+        </Entry>
+      </Menu>
+    </Option>
+  </TestSettings>
 </PhoronixTestSuite>

@@ -13,7 +13,7 @@ else
 fi
 
 echo "#!/bin/bash
-    fio --name=random-writers --ioengine=libaio --iodepth=4 --rw=randwrite --bs=32k --direct=0 --size=64m --numjobs=4 --runtime=60 --time_based \$@ > \$LOG_FILE 2>&1
+    fio --name=random-writers --ioengine=libaio --iodepth=4 --rw=randwrite --bs=32k --direct=0 --size=64m --numjobs=4 --time_based \$@ > \$LOG_FILE 2>&1
     echo \$? > ~/test-exit-status" > ~/disk
 chmod +x ~/disk
 
