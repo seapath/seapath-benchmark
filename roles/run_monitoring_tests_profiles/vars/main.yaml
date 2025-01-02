@@ -1,0 +1,3 @@
+---
+process_monitoring:
+  processes_to_monitor: # By default, monitor all processes
