@@ -7,10 +7,15 @@
 - name: Set test-profile run identifier
   set_fact:
     test_run_id: "{{ test_profile_name | replace('_', '') }}-{{ test_start_time.stdout }}"
+- name: Set test-profile arguments
+  set_fact:
+    test_profile_args: "{{ test_profile_args | default({}) | combine({ item.key: item.value }) }}"
+  with_dict: "{{ lookup('vars', test_profile_name) }}"
 - name: Start {{ test_profile_name }} monitoring
   shell:
     cmd: >-
       TEST_RESULTS_NAME="{{ test_run_id }}" phoronix-test-suite batch-benchmark {{ test_profile_name }}
+  environment: "{{ test_profile_args }}"
   async: 9999999
   poll: 0
 - name: Run needed custom task for {{ test_profile_name }}
