@@ -1,0 +1,6 @@
+---
+disk:
+  time_to_run: 5
+vm_migration:
+  resource: guest0
+  iterations: 5

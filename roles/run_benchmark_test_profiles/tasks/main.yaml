@@ -7,10 +7,16 @@
 - name: Set test-profile run identifier
   set_fact:
     test_run_id: "{{ test_profile_name | replace('_', '') }}-{{ test_start_time.stdout }}"
+- name: Set test-profile arguments
+  set_fact:
+    test_profile_args: "{{ test_profile_args | default({}) | combine({ item.key: item.value }) }}"
+  with_dict: "{{ lookup('vars', test_profile_name) }}"
+  when: test_profile_name is defined and test_profile_name in vars
 - name: Run {{ test_profile_name }} benchmark
   shell:
     cmd: >-
-      TEST_RESULTS_NAME="{{ test_run_id }}" phoronix-test-suite batch-benchmark "{{ test_profile_name }}"
+      TEST_RESULTS_NAME="{{ benchmark_test_run_id }}" phoronix-test-suite batch-benchmark "{{ test_profile_name }}"
+  environment: "{{ test_profile_args if test_profile_args is defined else {} }}"
 - name: Generate {{ test_profile_name }} test results PDF
   shell:
     cmd: >-
