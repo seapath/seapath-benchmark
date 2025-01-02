@@ -21,9 +21,7 @@
     cmd: >-
       generate_pie_chart /tmp/results
       /var/lib/phoronix-test-suite/test-results/{{ test_run_id }}/composite.xml
-      "{{ test_profile.process_monitoring.processes_to_monitor
-          if process_monitoring is not string and
-          test_profile.process_monitoring.processes_to_monitor is defined }}"
+      "{{ process_monitoring['processes_to_monitor'] }}"
 - name: Generate test results PDF
   shell:
     cmd: >-
