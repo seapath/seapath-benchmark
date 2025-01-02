@@ -18,13 +18,6 @@
   copy:
     src: "{{ test_profile }}"
     dest: /var/lib/phoronix-test-suite/test-profiles/local/
-- name: create {{ test_profile }} template
-  template:
-    src: "{{ item }}"
-    dest: "/var/lib/phoronix-test-suite/test-profiles/local/{{ test_profile }}/{{ item | basename | regex_replace('\\.j2$', '') }}"
-  with_fileglob:
-    - ../templates/{{ test_profile }}/*.j2
-
 - name: Install {{ test_profile }} benchmark
   shell:
     cmd: >-
