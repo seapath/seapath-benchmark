@@ -100,7 +100,7 @@ Make sure the phoronix-test-suite package is installed on each tested machines:
 To generate PDF reports, make sure the `rsvg-convert` package is installed.
 
 The user used by Ansible, targeted by inventory variable `ansible_user`
-variable must be configured on the publisher machine to have sudo access.
+variable must be configured on each machine to have sudo access.
 
 ## Usage
 ### Configuration
