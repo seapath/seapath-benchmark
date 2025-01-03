@@ -4,12 +4,16 @@
 - name: Initialize variable roles
   set_fact:
     active_benchmark: "{{ active_benchmark | default([]) }}"
+    benchmark_test_run_ids: "{{ benchmark_test_run_ids | default([]) }}"
 - name: Set test profile variable
   set_fact:
     test_profile_name: "{{ (test_profile | list | first if test_profile is not string else test_profile) | trim }}"
 - name: Set test-profile run identifier
   set_fact:
-    test_run_id: "{{ test_profile_name | replace('_', '') }}-{{ test_start_time.stdout }}"
+    benchmark_test_run_id: "{{ test_profile_name | replace('_', '') }}-{{ test_start_time.stdout }}"
+- name: Append benchmark_test_run_id to benchmark_test_run_ids
+  set_fact:
+    benchmark_test_run_ids: "{{ benchmark_test_run_ids + [benchmark_test_run_id] }}"
 - name: Set test-profile arguments
   set_fact:
     test_profile_args: "{{ test_profile_args | default({}) | combine({ item.key: item.value }) }}"
@@ -26,12 +30,3 @@
 - name: Register test profile benchmark status
   set_fact:
     active_benchmark: "{{ active_benchmark + [ { 'name': test_profile_name, 'status': temp_status } ] }}"
-- name: Generate {{ test_profile_name }} test results PDF
-  shell:
-    cmd: >-
-      phoronix-test-suite result-file-to-pdf {{ test_run_id }}
-- name: Fetch {{ test_profile_name }} PDF result file
-  fetch:
-    flat: true
-    src: /root/{{ test_run_id }}.pdf
-    dest: ../tests_results/{{ansible_hostname}}_{{ test_run_id }}_results.pdf

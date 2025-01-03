@@ -1,0 +1,10 @@
+---
+- name: Generate test results PDF
+  shell:
+    cmd: >-
+      phoronix-test-suite result-file-to-pdf {{ test_run_id }}
+- name: Fetch PDF result file
+  fetch:
+    flat: true
+    src: /root/{{ test_run_id }}.pdf
+    dest: ../tests_results/{{ansible_hostname}}_{{ test_run_id }}_results.pdf
