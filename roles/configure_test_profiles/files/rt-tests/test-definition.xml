@@ -7,7 +7,7 @@
     <Description>Cyclictest is a high-resolution test program for measuring the Linux kernel latencies.</Description>
     <ResultScale>ms Average</ResultScale>
     <Proportion>LIB</Proportion>
-    <TimesToRun>3</TimesToRun>
+    <TimesToRun>1</TimesToRun>
   </TestInformation>
   <TestProfile>
     <Version>1.0.0</Version>
@@ -26,5 +26,15 @@
     <Default>
       <Arguments>-q</Arguments>
     </Default>
+    <Option>
+      <DisplayName>Test Case</DisplayName>
+      <Identifier>test-case</Identifier>
+      <Menu>
+        <Entry>
+          <Name>clock_nanosleep TIME_ABSTIME, Interval 10000 ms, 10000 Loops</Name>
+          <Value>-t1 -p 80 -i 10000 -l 10000</Value>
+        </Entry>
+      </Menu>
+    </Option>
   </TestSettings>
 </PhoronixTestSuite>
