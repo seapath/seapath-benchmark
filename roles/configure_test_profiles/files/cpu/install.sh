@@ -13,7 +13,7 @@ else
 fi
 
 echo "#!/bin/bash
-    sysbench cpu run --threads=500 --time=60 \$@ > \$LOG_FILE 2>&1
+    sysbench cpu run --threads=500 \$@ > \$LOG_FILE 2>&1
     echo \$? > ~/test-exit-status" > ~/cpu
 chmod +x ~/cpu
 

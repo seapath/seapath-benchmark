@@ -1,6 +1,8 @@
 ---
 disk:
-  time_to_run: 5
+  time_to_run: 60
 vm_migration:
   resource: guest0
   iterations: 5
+cpu:
+  time_to_run: 60
