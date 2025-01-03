@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 RESULT_FILE="$1"
 TEMP=$(mktemp)
