@@ -54,13 +54,12 @@ called `test profiles`. Test profiles can be one of two types:
   performance of a particular system or SEAPATH components (ex: CPU,
   memory, disk, VM migration...)
 
-| Name | Test profiles type | Tested components | Compatible machines and infrastructure | Test arguments | Generated results |
-| -------- | ------- | ------- | ------- | ------- | ------- |
-| cpu | Benchmark | CPU | Hypervisor and VMs, all SEAPATH configuration | / | PDF report with sysbench score |
-| disk | Benchmark | Disk | Hypervisor and VMs, all SEAPATH configuration | / | PDF report with fio score |
-| vm_migration | Benchmark | CPU, disk | Hypervisor and VMs, only SEAPATH cluster configuration |- `resource`: name of the VM to migrate (default `guest0`) <br> - `iterations`: number of VM migration (default 5) | PDF report with average VM migration time |
-| process_monitoring | Monitoring | / | Hypervisor and VMs, all SEAPATH configuration | `processes_to_monitor`: list of processes to monitor separated by a coma `,`. If not provided, only shows the three most CPU consumer processes | HTML report with process CPU consumption per CPU core |
-
+| Name | Test profiles type | Tested components | Compatible machines and infrastructure | Test arguments | Generated results | Needed dependencies |
+| -------- | ------- | ------- | ------- | ------- | ------- | ------- |
+| cpu | Benchmark | CPU | Hypervisor and VMs, all SEAPATH configuration | / | PDF report with sysbench score | sysbench |
+| disk | Benchmark | Disk | Hypervisor and VMs, all SEAPATH configuration | / | PDF report with fio score | fio |
+| vm_migration | Benchmark | CPU, disk | Hypervisor and VMs, only SEAPATH cluster configuration |- `resource`: name of the VM to migrate (default `guest0`) <br> - `iterations`: number of VM migration (default 5) | PDF report with average VM migration time | A working SEAPATH cluster using crm as resource manager |
+| process_monitoring | Monitoring | / | Hypervisor and VMs, all SEAPATH configuration | `processes_to_monitor`: list of processes to monitor separated by a coma `,`. If not provided, only shows the three most CPU consumer processes | HTML report with process CPU consumption per CPU core | / |
 
 
 ## Installation
@@ -97,7 +96,22 @@ Make sure the phoronix-test-suite package is installed on each tested machines:
 2. Unzip the archive
 3. Run the file `install.sh`
 
-To generate PDF reports, make sure the `rsvg-convert` package is installed.
+For Debian based distribution:
+``` wget https://github.com/phoronix-test-suite/phoronix-test-suite/releases/download/v10.8.4/phoronix-test-suite_10.8.4_all.deb
+apt install phoronix-test-suite_10.8.4_all.deb
+```
+
+Then make sure following dependencies are satisfied on each tested machine:
+```
+apt-get install \
+librsvg2-bin \
+patch \
+php-xml
+```
+
+
+
+
 
 The user used by Ansible, targeted by inventory variable `ansible_user`
 variable must be configured on each machine to have sudo access.
@@ -124,7 +138,9 @@ Selected tests profiles in inventory file can be started using:
 ```
 cqfd -b run_test_profiles
 ```
+
 or
+
 ```
 cqfd run ansible-playbook -i inventories/<YOUR INVENTORY> playbooks/run_test_profiles.yaml
 ```
