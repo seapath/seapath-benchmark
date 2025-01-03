@@ -41,6 +41,15 @@
         test_profile: "{{ item }}"
       loop: "{{ benchmark }}"
       when: benchmark is defined
+    - name: Wait for benchmarks to finish
+      async_status:
+        jid: "{{ item.status.ansible_job_id }}"
+      register: temp
+      until: temp.finished
+      retries: 10000
+      delay: 10
+      loop: "{{ active_benchmark }}"
+      when: active_benchmark is defined
 - name: End monitoring on hypervisors ans VMs
   become: true
   hosts:
