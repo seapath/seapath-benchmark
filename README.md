@@ -56,8 +56,8 @@ called `test profiles`. Test profiles can be one of two types:
 
 | Name | Test profiles type | Tested components | Compatible machines and infrastructure | Test arguments | Generated results | Needed dependencies |
 | -------- | ------- | ------- | ------- | ------- | ------- | ------- |
-| cpu | Benchmark | CPU | Hypervisor and VMs, all SEAPATH configuration | / | PDF report with sysbench score | sysbench |
-| disk | Benchmark | Disk | Hypervisor and VMs, all SEAPATH configuration | / | PDF report with fio score | fio |
+| cpu | Benchmark | CPU | Hypervisor and VMs, all SEAPATH configuration | - `time_to_run`: duration of the test (default 60s) | PDF report with sysbench score | sysbench |
+| disk | Benchmark | Disk | Hypervisor and VMs, all SEAPATH configuration | - `time_to_run`: duration of the test (default 60s) | PDF report with fio score | fio |
 | vm_migration | Benchmark | CPU, disk | Hypervisor and VMs, only SEAPATH cluster configuration |- `resource`: name of the VM to migrate (default `guest0`) <br> - `iterations`: number of VM migration (default 5) | PDF report with average VM migration time | A working SEAPATH cluster using crm as resource manager |
 | process_monitoring | Monitoring | / | Hypervisor and VMs, all SEAPATH configuration | `processes_to_monitor`: list of processes to monitor separated by a coma `,`. If not provided, only shows the three most CPU consumer processes | HTML report with process CPU consumption per CPU core | / |
 
