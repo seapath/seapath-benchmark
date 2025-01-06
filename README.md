@@ -146,6 +146,10 @@ or
 cqfd run ansible-playbook -i inventories/<YOUR INVENTORY> playbooks/run_test_profiles.yaml
 ```
 
+Each test-profiles arguments have default values, which can be
+overwritten in the directory
+`roles/run_benchmark_test_profiles/vars/main.yaml` or
+`roles/run_monitoring_tests_profiles/vars/main.yaml`.
 ## Release notes
 
 ### Version v0.1
