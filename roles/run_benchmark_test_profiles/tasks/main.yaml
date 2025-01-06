@@ -3,8 +3,8 @@
 ---
 - name: Initialize variable roles
   set_fact:
-    active_benchmark: "{{ active_benchmark | default([]) }}"
-    benchmark_test_run_ids: "{{ benchmark_test_run_ids | default([]) }}"
+    active_benchmark: "{{ active_benchmark }}"
+    benchmark_test_run_ids: "{{ benchmark_test_run_ids }}"
 - name: Set test profile variable
   set_fact:
     test_profile_name: "{{ (test_profile | list | first if test_profile is not string else test_profile) | trim }}"
