@@ -1,20 +1,28 @@
 # Copyright (C) 2024 Savoir-faire Linux, Inc.
 # SPDX-License-Identifier: Apache-2.0
 ---
+- name: Initialize variable roles
+  set_fact:
+    active_monitoring: "{{ active_monitoring }}"
+    monitoring_test_run_ids: "{{ monitoring_test_run_ids }}"
 - name: Set {{ test_profile }} test profile name variable
   set_fact:
     test_profile_name: "{{ (test_profile | list | first if test_profile is not string else test_profile) | trim }}"
 - name: Set test-profile run identifier
   set_fact:
-    test_run_id: "{{ test_profile_name | replace('_', '') }}-{{ test_start_time.stdout }}"
+    monitoring_test_run_id: "{{ test_profile_name | replace('_', '') }}-{{ test_start_time.stdout }}"
+- name: Append monitoring_test_run_id to monitoring_test_run_ids
+  set_fact:
+    monitoring_test_run_ids: "{{ monitoring_test_run_ids + [monitoring_test_run_id] }}"
 - name: Set test-profile arguments
   set_fact:
     test_profile_args: "{{ test_profile_args | default({}) | combine({ item.key: item.value }) }}"
   with_dict: "{{ lookup('vars', test_profile_name) }}"
+  when: test_profile_name is defined and test_profile_name in vars
 - name: Start {{ test_profile_name }} monitoring
   shell:
     cmd: >-
-      TEST_RESULTS_NAME="{{ test_run_id }}" phoronix-test-suite batch-benchmark {{ test_profile_name }}
+      TEST_RESULTS_NAME="{{ monitoring_test_run_id }}" phoronix-test-suite batch-benchmark {{ test_profile_name }}
   environment: "{{ test_profile_args }}"
   async: 9999999
   poll: 0

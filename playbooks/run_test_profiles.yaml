@@ -74,8 +74,9 @@
     include_role:
       name: "get_monitoring_test_results"
     vars:
-      test_profile: "{{ item }}"
-    loop: "{{ monitoring }}"
+      test_profile: "{{ item.0 }}"
+      test_run_id: "{{ item.1 }}"
+    loop: "{{ monitoring | zip(monitoring_test_run_ids) | map('list') }}"
     when: monitoring is defined
 - name: Execute last tasks on localhost
   hosts:

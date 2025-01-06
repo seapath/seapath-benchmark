@@ -13,9 +13,6 @@
   register: process_check
   changed_when: false
   failed_when: false
-- name: Set test-profile run identifier
-  set_fact:
-    test_run_id: "{{ test_profile_name | replace('_', '') }}-{{ test_start_time.stdout }}"
 - name: Generate process_monitoring XML pie charts data
   shell:
     cmd: >-
