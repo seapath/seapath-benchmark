@@ -13,8 +13,8 @@ else
 fi
 
 echo "#!/bin/bash
-	cyclictest \$@ > \$LOG_FILE 2>&1" > rt-tests
-chmod +x rt-tests
+	cyclictest \$@ > \$LOG_FILE 2>&1" > rt_tests
+chmod +x rt_tests
 
 # Check out the `phoronix-test-suite debug-run` command when trying to
 # debug your install/run behavior
