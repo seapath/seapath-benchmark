@@ -1,0 +1,14 @@
+---
+test_scenario:
+  - type: monitoring
+    test_profiles:
+      - process_monitoring
+
+  - type: benchmark
+    test_profiles:
+      - disk:
+          time_to_run: 120
+      - cpu:
+          time_to_run: 120
+      - rt_tests
+    mode: parallel
