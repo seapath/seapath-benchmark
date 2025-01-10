@@ -5,6 +5,7 @@
   set_fact:
     active_monitoring: "{{ active_monitoring }}"
     monitoring_test_run_ids: "{{ monitoring_test_run_ids }}"
+    test_profile_exists: false
 - name: Set test profile name variable
   set_fact:
     test_profile_name: "{{ (test_profile | list | first if test_profile is not string else test_profile) | trim }}"
@@ -14,11 +15,14 @@
 - name: Append monitoring_test_run_id to monitoring_test_run_ids
   set_fact:
     monitoring_test_run_ids: "{{ monitoring_test_run_ids + [monitoring_test_run_id] }}"
-- name: Set test-profile arguments
+- name: Check if {{ test_profile_name }} arguments exists in role vars
+  set_fact:
+    test_profile_exists: "{{ test_profile_name in vars and lookup('vars', test_profile_name) is defined }}"
+- name: Set test-profile arguments from role vars
   set_fact:
     test_profile_args: "{{ test_profile_args | default({}) | combine({ item.key: item.value }) }}"
   with_dict: "{{ lookup('vars', test_profile_name) }}"
-  when: test_profile_name is defined and test_profile_name in vars
+  when: test_profile_exists|bool == true
 - name: Start {{ test_profile_name }} monitoring
   shell:
     cmd: >-
