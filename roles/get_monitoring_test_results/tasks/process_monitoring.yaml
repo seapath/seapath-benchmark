@@ -5,14 +5,15 @@
   file:
     path: /tmp/stop_waiting
     state: touch
-- name: Ensure phoronix have finished his work
-  shell: >
-    while pgrep -x phoronix > /dev/null; do
-      sleep 1;
-    done
-  register: process_check
-  changed_when: false
-  failed_when: false
+- name: Wait for benchmarks to finish
+  async_status:
+    jid: "{{ item.status.ansible_job_id }}"
+  register: temp
+  until: temp.finished
+  retries: 10000
+  delay: 10
+  loop: "{{ active_monitoring }}"
+  when: active_monitoring is defined
 - name: Generate process_monitoring XML pie charts data
   shell:
     cmd: >-
