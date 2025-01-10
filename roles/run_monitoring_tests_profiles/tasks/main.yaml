@@ -5,7 +5,7 @@
   set_fact:
     active_monitoring: "{{ active_monitoring }}"
     monitoring_test_run_ids: "{{ monitoring_test_run_ids }}"
-- name: Set {{ test_profile }} test profile name variable
+- name: Set test profile name variable
   set_fact:
     test_profile_name: "{{ (test_profile | list | first if test_profile is not string else test_profile) | trim }}"
 - name: Set test-profile run identifier
