@@ -9,38 +9,50 @@
       file:
         path: ../tests_results
         state: directory
-- name: Start monitoring on the hypervisors and VMs
+
+- name: Prepare tested machines
   become: true
   hosts:
-    - hypervisors
-    - VMs
+    - monitored_machines
+    - benchmarked_machines
+  vars:
+    - test_scenario_name: disk_cpu_rttest
   tasks:
     - name: Record test start time
       shell:
         cmd: >-
           date +%F-%Hh%Mm%S
       register: test_start_time
-    - name: Run monitoring test-profiles
-      include_role:
-        name: "run_monitoring_tests_profiles"
-      vars:
-        test_profile: "{{ item }}"
-      loop: "{{ monitoring }}"
-      when: monitoring is defined
+    - name: Load scenario
+      include_vars:
+        file: "../vars/test_scenarios/{{ test_scenario_name }}.yaml"
+        name: test_scenario
 
-- name: Start benchmark on the hypervisors and VMs
+- name: Start monitoring test-profiles
   become: true
-  hosts:
-    - hypervisors
-    - VMs
+  hosts: monitored_machines
   tasks:
     - name: Run test-profiles
       include_role:
+        name: "run_monitoring_tests_profiles"
+      vars:
+        test_profile: "{{ item[1] }}"
+        mode: "{{ item[0].mode }}"
+      loop: "{{ test_scenario.test_scenario|subelements('test_profiles') }}"
+      when: item[0].type == 'monitoring'
+
+- name: Start benchmark test-profiles
+  become: true
+  hosts: benchmarked_machines
+  tasks:
+    - name: Run benchmark test-profiles
+      include_role:
         name: "run_benchmark_test_profiles"
       vars:
-        test_profile: "{{ item }}"
-      loop: "{{ benchmark }}"
-      when: benchmark is defined
+        test_profile: "{{ item[1] }}"
+        mode: "{{ item[0].mode }}"
+      loop: "{{ test_scenario.test_scenario|subelements('test_profiles') }}"
+      when: item[0].type == 'benchmark'
     - name: Wait for benchmarks to finish
       async_status:
         jid: "{{ item.status.ansible_job_id }}"
@@ -51,11 +63,23 @@
       loop: "{{ active_benchmark }}"
       when: active_benchmark is defined
 
-- name: End benchmarking on hypervisors and VMs
+- name: End monitoring on monitored machines
   become: true
   hosts:
-    - hypervisors
-    - VMs
+    - monitored_machines
+  tasks:
+  - name: Generate monitoring test-profiles results
+    include_role:
+      name: "get_monitoring_test_results"
+    vars:
+      test_profile: "{{ item.key }}"
+      test_run_id: "{{ item.value }}"
+    loop: "{{ monitoring_test_run_ids | dict2items }}"
+    when: monitoring_test_run_ids is defined
+
+- name: End benchmarks on benchmarked machines
+  become: true
+  hosts: benchmarked_machines
   tasks:
     - name: Generate benchmark test-profiles results
       include_role:
@@ -63,21 +87,8 @@
       vars:
         test_run_id: "{{ item }}"
       loop: "{{ benchmark_test_run_ids }}"
-      when: benchmark is defined
-- name: End monitoring on hypervisors ans VMs
-  become: true
-  hosts:
-    - VMs
-    - hypervisors
-  tasks:
-  - name: Generate monitoring test-profiles results
-    include_role:
-      name: "get_monitoring_test_results"
-    vars:
-      test_profile: "{{ item.0 }}"
-      test_run_id: "{{ item.1 }}"
-    loop: "{{ monitoring | zip(monitoring_test_run_ids) | map('list') }}"
-    when: monitoring is defined
+      when: benchmark_test_run_ids is defined
+
 - name: Execute last tasks on localhost
   hosts:
     localhost
