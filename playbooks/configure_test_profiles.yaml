@@ -4,8 +4,8 @@
 - name: Prepare hypervisor and VMs
   become: true
   hosts:
-    - hypervisors
-    - VMs
+    - monitored_machines
+    - benchmarked_machines
   tasks:
     - name: Include dependencies variables
       include_vars:
@@ -13,6 +13,9 @@
     - name: Include patches variables
       include_vars:
         file: "patches.yaml"
+    - name: Include test-profiles variables
+      include_vars:
+        file: "test_profiles.yaml"
     - name: Check needed dependencies
       command: which {{ item }}
       loop: "{{ dependencies }}"
@@ -46,12 +49,4 @@
         name: "configure_test_profiles"
       vars:
         test_profile_name: "{{ item }}"
-      loop: "{{ monitoring }}"
-      when: monitoring is defined
-    - name: Configure benchmark test-profiles
-      include_role:
-        name: "configure_test_profiles"
-      vars:
-        test_profile_name: "{{ item }}"
-      loop: "{{ benchmark }}"
-      when: benchmark is defined
+      loop: "{{ test_profiles }}"
