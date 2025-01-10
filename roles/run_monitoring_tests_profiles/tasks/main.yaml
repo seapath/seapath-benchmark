@@ -30,5 +30,9 @@
   environment: "{{ test_profile_args }}"
   async: 9999999
   poll: 0
+  register: temp_status
+- name: Register test profile monitoring status
+  set_fact:
+    active_monitoring: "{{ active_monitoring + [ { 'name': test_profile_name, 'status': temp_status } ] }}"
 - name: Run needed custom task for {{ test_profile_name }}
   include_tasks: "{{ test_profile_name }}.yaml"
