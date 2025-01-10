@@ -25,15 +25,15 @@
       <SearchMediaForCache>TRUE</SearchMediaForCache>
       <SymLinkFilesFromCache>FALSE</SymLinkFilesFromCache>
       <PromptForDownloadMirror>FALSE</PromptForDownloadMirror>
-      <EnvironmentDirectory>~/.phoronix-test-suite/installed-tests/</EnvironmentDirectory>
-      <CacheDirectory>~/.phoronix-test-suite/download-cache/</CacheDirectory>
+      <EnvironmentDirectory>/var/lib/phoronix-test-suite/installed-tests/</EnvironmentDirectory>
+      <CacheDirectory>/var/lib/phoronix-test-suite/download-cache/</CacheDirectory>
     </Installation>
     <Testing>
       <SaveSystemLogs>TRUE</SaveSystemLogs>
       <SaveInstallationLogs>TRUE</SaveInstallationLogs>
       <SaveTestLogs>TRUE</SaveTestLogs>
       <RemoveTestInstallOnCompletion>FALSE</RemoveTestInstallOnCompletion>
-      <ResultsDirectory>~/.phoronix-test-suite/test-results/</ResultsDirectory>
+      <ResultsDirectory>/var/lib/phoronix-test-suite/test-results/</ResultsDirectory>
       <AlwaysUploadResultsToOpenBenchmarking>FALSE</AlwaysUploadResultsToOpenBenchmarking>
       <AutoSortRunQueue>TRUE</AutoSortRunQueue>
       <ShowPostRunStatistics>TRUE</ShowPostRunStatistics>
@@ -64,8 +64,8 @@
       <Configured>TRUE</Configured>
     </BatchMode>
     <Networking>
-      <NoInternetCommunication>FALSE</NoInternetCommunication>
-      <NoNetworkCommunication>FALSE</NoNetworkCommunication>
+      <NoInternetCommunication>TRUE</NoInternetCommunication>
+      <NoNetworkCommunication>TRUE</NoNetworkCommunication>
       <Timeout>20</Timeout>
       <ProxyAddress></ProxyAddress>
       <ProxyPort></ProxyPort>
@@ -78,7 +78,7 @@
       <WebSocketPort>RANDOM</WebSocketPort>
       <AdvertiseServiceZeroConf>TRUE</AdvertiseServiceZeroConf>
       <AdvertiseServiceOpenBenchmarkRelay>TRUE</AdvertiseServiceOpenBenchmarkRelay>
-      <PhoromaticStorage>~/.phoronix-test-suite/phoromatic/</PhoromaticStorage>
+      <PhoromaticStorage>/var/lib/phoronix-test-suite/phoromatic/</PhoromaticStorage>
     </Server>
   </Options>
 </PhoronixTestSuite>
