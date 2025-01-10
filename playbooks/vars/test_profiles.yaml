@@ -1,0 +1,7 @@
+---
+test_profiles:
+    - disk
+    - cpu
+    - vm_migration
+    - process_monitoring
+    - rt_tests
