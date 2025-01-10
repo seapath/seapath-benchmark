@@ -9,6 +9,11 @@
 - name: Set test profile variable
   set_fact:
     test_profile_name: "{{ (test_profile | list | first if test_profile is not string else test_profile) | trim }}"
+- name: Extract test profile arguments from test scenario
+  set_fact:
+    test_profile_args: "{{ test_profile_args | default({}) | combine({ item.key: item.value }) }}"
+  when: test_profile is not string
+  loop: "{{ lookup('ansible.builtin.dict', test_profile[test_profile_name],wantlist=True ) }}"
 - name: Set test-profile run identifier
   set_fact:
     benchmark_test_run_id: "{{ test_profile_name | replace('_', '') }}-{{ test_start_time.stdout }}"
@@ -18,12 +23,13 @@
 - name: Check if {{ test_profile_name }} arguments exists in role vars
   set_fact:
     test_profile_exists: "{{ test_profile_name in vars and lookup('vars', test_profile_name) is defined }}"
+  when: test_profile_args is not defined
 - name: Set test-profile arguments from role vars
   set_fact:
     test_profile_args: "{{ test_profile_args | default({}) | combine({ item.key: item.value }) }}"
   with_dict: "{{ lookup('vars', test_profile_name) }}"
   when: test_profile_exists|bool == true
-- name: Run {{ test_profile_name }} benchmark
+- name: Run {{ test_profile_name }} benchmark in parallel mode
   shell:
     cmd: >-
       TEST_RESULTS_NAME="{{ benchmark_test_run_id }}" phoronix-test-suite batch-benchmark "{{ test_profile_name }}"
@@ -31,6 +37,14 @@
   async: 9999999
   poll: 0
   register: temp_status
+  when: mode is match("parallel")
+- name: Run {{ test_profile_name }} benchmark in sequential mode
+  shell:
+    cmd: >-
+      TEST_RESULTS_NAME="{{ benchmark_test_run_id }}" phoronix-test-suite batch-benchmark "{{ test_profile_name }}"
+  environment: "{{ test_profile_args if test_profile_args is defined else {} }}"
+  when: mode is match("sequential")
 - name: Register test profile benchmark status
   set_fact:
     active_benchmark: "{{ active_benchmark + [ { 'name': test_profile_name, 'status': temp_status } ] }}"
+  when: mode is match("parallel")
