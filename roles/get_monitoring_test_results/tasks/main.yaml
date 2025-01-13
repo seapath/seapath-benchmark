@@ -1,8 +1,5 @@
 # Copyright (C) 2024 Savoir-faire Linux, Inc.
 # SPDX-License-Identifier: Apache-2.0
 ---
-- name: Set {{ test_profile }} test profile name variable
-  set_fact:
-    test_profile_name: "{{ (test_profile | list | first if test_profile is not string else test_profile) | trim }}"
-- name: Run needed custom task for {{ test_profile_name }}
-  include_tasks: "{{ test_profile_name }}.yaml"
+- name: Run needed custom task for {{ monitoring_item['name'] }}
+  include_tasks: "{{ monitoring_item['name'] }}.yaml"
