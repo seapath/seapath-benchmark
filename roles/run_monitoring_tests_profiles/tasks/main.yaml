@@ -39,6 +39,17 @@
   register: temp_status
 - name: Register test profile monitoring status
   set_fact:
-    active_monitoring: "{{ active_monitoring + [ { 'name': test_profile_name, 'status': temp_status } ] }}"
+    active_monitoring: >-
+      {{
+        active_monitoring +
+        [
+          {
+            'name': test_profile_name,
+            'status': temp_status,
+            'args': test_profile_args,
+            'monitoring_test_run_id': monitoring_test_run_id
+          }
+        ]
+      }}
 - name: Run needed custom task for {{ test_profile_name }}
   include_tasks: "{{ test_profile_name }}.yaml"

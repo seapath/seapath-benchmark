@@ -7,30 +7,28 @@
     state: touch
 - name: Wait for process_monitoring to finish
   async_status:
-    jid: "{{ item.status.ansible_job_id }}"
+    jid: "{{ monitoring_item.status.ansible_job_id }}"
   register: temp
   until: temp.finished
   retries: 10000
   delay: 10
-  loop: "{{ active_monitoring }}"
-  when: active_monitoring is defined
 - name: Generate process_monitoring XML pie charts data
   shell:
     cmd: >-
       generate_pie_chart /tmp/results
-      /var/lib/phoronix-test-suite/test-results/{{ test_run_id }}/composite.xml
-      "{{ process_monitoring['processes_to_monitor'] }}"
+      /var/lib/phoronix-test-suite/test-results/{{  monitoring_item['monitoring_test_run_id'] }}/composite.xml
+      "{{ monitoring_item['args']['processes_to_monitor'] }}"
 - name: Generate test results PDF
   shell:
     cmd: >-
-      phoronix-test-suite result-file-to-pdf {{ test_run_id }}
+      phoronix-test-suite result-file-to-pdf {{ monitoring_item['monitoring_test_run_id'] }}
 - name: Fetch PDF result file
   fetch:
     flat: true
-    src: /root/{{ test_run_id }}.pdf
-    dest: ../tests_results/{{ansible_hostname}}_{{ test_run_id }}_results.pdf
+    src: /root/{{  monitoring_item['monitoring_test_run_id'] }}.pdf
+    dest: ../tests_results/{{ansible_hostname}}_{{  monitoring_item['monitoring_test_run_id'] }}_results.pdf
 - name: Fetch process_monitoring results file
   fetch:
     flat: true
     src: /tmp/results
-    dest: ../tests_results/{{ansible_hostname}}_{{ test_run_id }}_results
+    dest: ../tests_results/{{ansible_hostname}}_{{  monitoring_item['monitoring_test_run_id'] }}_results

@@ -71,11 +71,9 @@
   - name: Generate monitoring test-profiles results
     include_role:
       name: "get_monitoring_test_results"
-    vars:
-      test_profile: "{{ item.key }}"
-      test_run_id: "{{ item.value }}"
-    loop: "{{ monitoring_test_run_ids | dict2items }}"
-    when: monitoring_test_run_ids is defined
+    loop: "{{ active_monitoring }}"
+    loop_control:
+      loop_var: monitoring_item
 
 - name: End benchmarks on benchmarked machines
   become: true
