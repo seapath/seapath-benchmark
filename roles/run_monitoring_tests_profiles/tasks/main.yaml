@@ -4,7 +4,6 @@
 - name: Initialize variable roles
   set_fact:
     active_monitoring: "{{ active_monitoring }}"
-    monitoring_test_run_ids: "{{ monitoring_test_run_ids }}"
     test_profile_exists: false
 - name: Set test profile name variable
   set_fact:
@@ -17,9 +16,6 @@
 - name: Set test-profile run identifier
   set_fact:
     monitoring_test_run_id: "{{ test_profile_name | replace('_', '') }}-{{ test_start_time.stdout }}"
-- name: Append monitoring_test_run_id to monitoring_test_run_ids
-  set_fact:
-    monitoring_test_run_ids: "{{ monitoring_test_run_ids | combine({ test_profile_name: monitoring_test_run_id }) }}"
 - name: Check if {{ test_profile_name }} arguments exists in role vars
   set_fact:
     test_profile_exists: "{{ test_profile_name in vars and lookup('vars', test_profile_name) is defined }}"
