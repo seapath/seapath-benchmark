@@ -55,13 +55,15 @@
       when: item[0].type == 'benchmark'
     - name: Wait for benchmarks to finish
       async_status:
-        jid: "{{ item.status.ansible_job_id }}"
+        jid: "{{ benchmark_item.status.ansible_job_id }}"
       register: temp
       until: temp.finished
       retries: 10000
       delay: 10
       loop: "{{ active_benchmark }}"
-      when: active_benchmark is defined
+      loop_control:
+        loop_var: benchmark_item
+      when: benchmark_item.status.ansible_job_id is defined
 
 - name: End monitoring on monitored machines
   become: true
@@ -82,10 +84,10 @@
     - name: Generate benchmark test-profiles results
       include_role:
         name: "get_benchmark_test_results"
-      vars:
-        test_run_id: "{{ item }}"
-      loop: "{{ benchmark_test_run_ids }}"
-      when: benchmark_test_run_ids is defined
+      loop: "{{ active_benchmark }}"
+      loop_control:
+        loop_var: benchmark_item
+      when: active_benchmark is defined
 
 - name: Execute last tasks on localhost
   hosts:

@@ -46,5 +46,15 @@
   when: mode is match("sequential")
 - name: Register test profile benchmark status
   set_fact:
-    active_benchmark: "{{ active_benchmark + [ { 'name': test_profile_name, 'status': temp_status } ] }}"
-  when: mode is match("parallel")
+    active_benchmark: >-
+      {{
+        active_benchmark +
+        [
+          {
+            'name': test_profile_name,
+            'status': temp_status,
+            'args': test_profile_args,
+            'benchmark_test_run_id': benchmark_test_run_id
+          }
+        ]
+      }}
