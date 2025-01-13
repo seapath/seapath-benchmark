@@ -160,13 +160,6 @@ overwritten in the test scenario.
 
 ## Release notes
 
-### Version v0.1
-
-* Configuration of the machines and the test profiles
-* Add CPU, disk, vm_migration benchmark test profiles
-* Add process_monitoring monitoring test profile
-* Generation of results per test-profiles
-
 ### Version v0.2
 
 General:
@@ -184,3 +177,10 @@ Process_monitoring:
 
 Vm_migration:
 * Add optional test-profiles arguments `resource` and `iterations`
+
+### Version v0.1
+
+* Configuration of the machines and the test profiles
+* Add CPU, disk, vm_migration benchmark test profiles
+* Add process_monitoring monitoring test profile
+* Generation of results per test-profiles
