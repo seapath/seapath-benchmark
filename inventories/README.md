@@ -2,12 +2,9 @@
 SPDX-License-Identifier: Apache-2.0 -->
 
 # Inventories directory
-This directory contains the inventory files used to configure the
-benchmark used.
+This directory contains the inventory files used to configure which
+machines are monitored or benchmarked.
 
 # Test profiles selection
-Test profiles have to be defined for each host, in the inventory file.
-
-For example, the following code run the test profile monitoring
-`process_monitoring`, and the `disk`, `cpu` and `vm_migration` test-profiles
-benchmark on `hypervisor1`.
+To benchmark or monitor the tested machines, place the host machines in
+the `monitored_machines` or `benchmarked_machines` groups.
