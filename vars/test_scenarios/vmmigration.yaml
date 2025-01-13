@@ -1,0 +1,13 @@
+---
+test_scenario:
+  - type: monitoring
+    test_profiles:
+      - process_monitoring:
+          processes_to_monitor: crm,qemu-system-x86
+
+  - type: benchmark
+    test_profiles:
+      - vm_migration:
+          resource: guest0
+          iterations: 5
+    mode: parallel
