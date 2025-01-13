@@ -160,6 +160,23 @@ overwritten in the test scenario.
 
 ## Release notes
 
+### Version v0.3
+General:
+  * Various bug fixes and improvements
+  * Add test-scenario support
+  * Run the phoronix-test-suite in offline mode
+  * Add vmmigration and disk_cpu_rttest test scenarios
+  * Explicit in README packages dependencies needed
+
+Process_monitoring:
+  * Fix an issue where pie charts were not displaying in PDF report
+
+Rttests:
+  * Fix an issue where test profile was running infinitely
+
+cpu:
+  * Add `time_to_run` parameter
+
 ### Version v0.2
 
 General:
