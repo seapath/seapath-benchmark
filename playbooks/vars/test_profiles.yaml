@@ -5,3 +5,4 @@ test_profiles:
     - vm_migration
     - process_monitoring
     - rt_tests
+    - idle
