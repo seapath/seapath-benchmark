@@ -16,7 +16,6 @@
     <TestType>System</TestType>
     <License>Free</License>
     <Status>Verified</Status>
-    <ExternalDependencies>build-utilities, numa-development</ExternalDependencies>
     <RequiresRoot>TRUE</RequiresRoot>
     <EnvironmentSize>1</EnvironmentSize>
     <ProjectURL>http://rt.wiki.kernel.org/index.php/Cyclictest</ProjectURL>
