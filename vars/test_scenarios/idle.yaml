@@ -1,0 +1,10 @@
+---
+test_scenario:
+  - type: monitoring
+    test_profiles:
+      - process_monitoring
+  - type: benchmark
+    test_profiles:
+      - idle:
+          time_to_run: 1800
+    mode: sequential
