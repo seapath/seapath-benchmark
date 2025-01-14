@@ -76,7 +76,7 @@
     loop: "{{ active_monitoring }}"
     loop_control:
       loop_var: monitoring_item
-
+    when: active_monitoring is defined
 - name: End benchmarks on benchmarked machines
   become: true
   hosts: benchmarked_machines
