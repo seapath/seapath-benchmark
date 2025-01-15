@@ -67,7 +67,7 @@ while true; do
         exit 0
     fi
 
-    top -b -n1 | sed -n '/CPU/,\$p' | sed '/CPU/d' | head -n5 >> "\$LOG"
+    top -H -b -n1 | sed -n '/CPU/,\$p' | sed '/CPU/d' | head -n5 >> "\$LOG"
     ITERATION=\$((ITERATION + 1))
     sleep 1
 done
