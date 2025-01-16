@@ -13,11 +13,17 @@ RESULT=\$(mktemp)
 generate_results() {
     awk -v iteration=\$ITERATION '
     {
+        OFS = \" \";
         cpu = \$1;
         mem = \$2;
         iow = \$3;
-        process = \$4;
-        core = \$5;
+
+        process = \"\";
+        for (i = 4; i <= NF - 1; i++) {
+            process = (process == \"\" ? \$i : process OFS \$i);
+        }
+
+        core = \$NF;
 
         cpu_data[process, core] += cpu;
         mem_data[process, core] += mem;
@@ -34,7 +40,7 @@ generate_results() {
             avg_cpu = cpu_data[key] / iteration;
             avg_mem = mem_data[key] / iteration;
             raw_iow = iow_data[key]
-            printf \"%-43s %-8s %8.2f%% %8.2f%% %20s\n\", proc, core, avg_cpu, avg_mem, raw_iow;
+            printf \"%-43s; %-8s; %8.2f%%; %8.2f%%; %20s\n\", proc, core, avg_cpu, avg_mem, raw_iow;
         }
     }
     ' "\$LOG" > "\$RESULT"
