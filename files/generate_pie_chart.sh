@@ -7,7 +7,7 @@ XML_TEMP=$(mktemp)
 MONITOR_PROCESSES="${3:-}" # Comma-separated list of processes to monitor
 
 generate_xml() {
-  awk -v output="$TEMP" -v monitor="$MONITOR_PROCESSES" -f /usr/bin/generate_pie_chart_xml.awk "$RESULT_FILE"
+  awk -F ';' -v output="$TEMP" -v monitor="$MONITOR_PROCESSES" -f /usr/bin/generate_pie_chart_xml.awk "$RESULT_FILE"
 }
 
 generate_xml

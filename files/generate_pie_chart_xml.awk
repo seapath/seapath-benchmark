@@ -11,6 +11,7 @@ BEGIN {
 {
   process = $1; core = $2; cpu = $3;
   gsub(/%/, "", cpu);  # Remove the percentage sign
+  gsub(/[ \t]/, "", core);
 
   # Collect CPU usage by core and process
   cpu_usage[core] += cpu;
