@@ -24,13 +24,16 @@
       <AllowCacheShare>TRUE</AllowCacheShare>
     </Default>
     <Option>
-      <DisplayName>Time to run</DisplayName>
-      <Identifier>time_to_run</Identifier>
-      <ArgumentPrefix>--runtime=</ArgumentPrefix>
+      <DisplayName>fio mode</DisplayName>
+      <Identifier>fio-mode</Identifier>
       <Menu>
         <Entry>
-          <Name>Default</Name>
-          <Value>$time_to_run</Value>
+          <Name>Time based</Name>
+          <Value>--time_based --runtime=$time_to_run</Value>
+        </Entry>
+        <Entry>
+          <Name>Size based</Name>
+          <Value>--size=$size</Value>
         </Entry>
       </Menu>
     </Option>
