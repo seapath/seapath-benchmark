@@ -1,8 +1,13 @@
 ---
 disk:
-  time_to_run: 60
+  time_to_run:
+    menu_entry: 1
+    default_value: 60
+  size:
+    menu_entry: 2
+    default_value: 10M
 vm_migration:
   resource: guest0
   iterations: 5
 cpu:
-  time_to_run: 60
+  time: 60

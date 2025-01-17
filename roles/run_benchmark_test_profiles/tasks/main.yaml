@@ -13,6 +13,13 @@
     test_profile_args: "{{ test_profile_args | default({}) | combine({ item.key: item.value }) }}"
   when: test_profile is not string
   loop: "{{ lookup('ansible.builtin.dict', test_profile[test_profile_name],wantlist=True ) }}"
+- name: Select menu entry if test profile has many options
+  set_fact:
+    menu_entry: "{{ arg[test_profile_args|first]['menu_entry'] }}"
+  loop: "{{ lookup('vars', test_profile_name, wantlist=True) }}"
+  loop_control:
+    loop_var: arg
+  when: arg[test_profile_args|first]['menu_entry'] is defined
 - name: Set test-profile run identifier
   set_fact:
     benchmark_test_run_id: "{{ test_profile_name | replace('_', '') }}-{{ test_start_time.stdout }}"
@@ -28,7 +35,7 @@
 - name: Run {{ test_profile_name }} benchmark in parallel mode
   shell:
     cmd: >-
-      TEST_RESULTS_NAME="{{ benchmark_test_run_id }}" phoronix-test-suite batch-benchmark "{{ test_profile_name }}"
+      echo {{ menu_entry }} | TEST_RESULTS_NAME="{{ benchmark_test_run_id }}" phoronix-test-suite batch-benchmark "{{ test_profile_name }}"
   environment: "{{ test_profile_args if test_profile_args is defined else {} }}"
   async: 9999999
   poll: 0
@@ -37,7 +44,7 @@
 - name: Run {{ test_profile_name }} benchmark in sequential mode
   shell:
     cmd: >-
-      TEST_RESULTS_NAME="{{ benchmark_test_run_id }}" phoronix-test-suite batch-benchmark "{{ test_profile_name }}"
+      echo {{ menu_entry }} | TEST_RESULTS_NAME="{{ benchmark_test_run_id }}" phoronix-test-suite batch-benchmark "{{ test_profile_name }}"
   environment: "{{ test_profile_args if test_profile_args is defined else {} }}"
   when: mode is match("sequential")
 - name: Register test profile benchmark status
