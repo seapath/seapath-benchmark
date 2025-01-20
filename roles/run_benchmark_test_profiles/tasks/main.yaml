@@ -11,9 +11,11 @@
     test_profile_name: "{{ (test_profile | list | first if test_profile is not string else test_profile) | trim }}"
 - name: Extract test profile arguments from test scenario
   set_fact:
-    test_profile_args: "{{ test_profile_args | default({}) | combine({ item.key: item.value }) }}"
+    test_profile_args: "{{ test_profile_args | default({}) | combine({ arg.key: arg.value }) }}"
   when: test_profile is not string
   loop: "{{ lookup('ansible.builtin.dict', test_profile[test_profile_name],wantlist=True ) }}"
+  loop_control:
+    loop_var: arg
 - name: Select menu entry if test profile has many options
   set_fact:
     menu_entry: "{{ arg[test_profile_args|first]['menu_entry'] }}"
