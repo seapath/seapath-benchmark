@@ -7,4 +7,4 @@
   fetch:
     flat: true
     src: /root/{{ benchmark_item['benchmark_test_run_id'] }}.pdf
-    dest: ../tests_results/{{ansible_hostname}}_{{ benchmark_item['benchmark_test_run_id'] }}_results.pdf
+    dest: ../tests_results/{{inventory_hostname}}_{{ benchmark_item['benchmark_test_run_id'] }}_results.pdf
