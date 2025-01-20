@@ -5,6 +5,7 @@
   set_fact:
     active_benchmark: "{{ active_benchmark }}"
     test_profile_exists: false
+    test_profile_args:
 - name: Set test profile variable
   set_fact:
     test_profile_name: "{{ (test_profile | list | first if test_profile is not string else test_profile) | trim }}"
