@@ -28,7 +28,7 @@
 - name: Start {{ test_profile_name }} monitoring
   shell:
     cmd: >-
-      TEST_RESULTS_NAME="{{ monitoring_test_run_id }}" phoronix-test-suite batch-benchmark {{ test_profile_name }}
+      TEST_RESULTS_NAME="{{ monitoring_test_run_id }}" MONITOR=all phoronix-test-suite batch-benchmark {{ test_profile_name }}
   environment: "{{ test_profile_args }}"
   async: 9999999
   poll: 0
