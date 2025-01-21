@@ -1,0 +1,11 @@
+---
+test_scenario:
+  - type: monitoring
+    test_profiles:
+      - process_monitoring
+
+  - type: benchmark
+    test_profiles:
+      - disk:
+          size: 1G
+    mode: parallel
