@@ -38,7 +38,7 @@
 - name: Run {{ test_profile_name }} benchmark in parallel mode
   shell:
     cmd: >-
-      echo {{ menu_entry }} | TEST_RESULTS_NAME="{{ benchmark_test_run_id }}" phoronix-test-suite batch-benchmark "{{ test_profile_name }}"
+      echo {{ menu_entry }} | TEST_RESULTS_NAME="{{ benchmark_test_run_id }}" MONITOR=all phoronix-test-suite batch-benchmark "{{ test_profile_name }}"
   environment: "{{ test_profile_args if test_profile_args is defined else {} }}"
   async: 9999999
   poll: 0
@@ -47,7 +47,7 @@
 - name: Run {{ test_profile_name }} benchmark in sequential mode
   shell:
     cmd: >-
-      echo {{ menu_entry }} | TEST_RESULTS_NAME="{{ benchmark_test_run_id }}" phoronix-test-suite batch-benchmark "{{ test_profile_name }}"
+      echo {{ menu_entry }} | TEST_RESULTS_NAME="{{ benchmark_test_run_id }}" MONITOR=all phoronix-test-suite batch-benchmark "{{ test_profile_name }}"
   environment: "{{ test_profile_args if test_profile_args is defined else {} }}"
   when: mode is match("sequential")
 - name: Register test profile benchmark status
