@@ -1,3 +1,5 @@
 ---
 process_monitoring:
   processes_to_monitor: # By default, monitor all processes
+network_monitoring:
+  interface: team0

@@ -6,3 +6,4 @@ test_profiles:
     - process_monitoring
     - rt_tests
     - idle
+    - network_monitoring
