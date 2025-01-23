@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<PhoronixTestSuite>
+  <ResultsParser>
+    <OutputTemplate>
+{
+  rx_ratestrings: {
+    max_rx: #_RESULT_# KiB/s,
+  },
+}
+   </OutputTemplate>
+   <ResultAfterString>max_rx:</ResultAfterString>
+    <LineHint>KiB/s,</LineHint>
+    <DivideResultBy>1024</DivideResultBy>
+    <ResultScale>MB/s</ResultScale>
+    <ResultProportion>HIB</ResultProportion>
+    <ArgumentsDescription>Max rx</ArgumentsDescription>
+  </ResultsParser>
+  <ResultsParser>
+    <OutputTemplate>
+{
+  rx_ratestrings: {
+    max_rx: #_RESULT_# MiB/s,
+  },
+}
+   </OutputTemplate>
+   <ResultAfterString>max_rx:</ResultAfterString>
+    <LineHint>MiB/s,</LineHint>
+    <ResultScale>MB/s</ResultScale>
+    <ResultProportion>HIB</ResultProportion>
+    <ArgumentsDescription>Max rx</ArgumentsDescription>
+  </ResultsParser>
+  <ResultsParser>
+    <OutputTemplate>
+{
+  rx_ratestrings: {
+    max_rx: 526.54 KiB/s,
+    avg_rx: #_RESULT_# KiB/s,
+  },
+}
+   </OutputTemplate>
+   <ResultAfterString>avg_rx:</ResultAfterString>
+    <LineHint>KiB/s,</LineHint>
+    <DivideResultBy>1024</DivideResultBy>
+    <ResultScale>MB/s</ResultScale>
+    <ResultProportion>HIB</ResultProportion>
+    <ArgumentsDescription>Average rx</ArgumentsDescription>
+  </ResultsParser>
+  <ResultsParser>
+    <OutputTemplate>
+{
+  rx_ratestrings: {
+    max_rx: 526.54 KiB/s,
+    avg_rx: #_RESULT_# MiB/s,
+  },
+}
+   </OutputTemplate>
+   <ResultAfterString>avg_rx:</ResultAfterString>
+    <LineHint>MiB/s,</LineHint>
+    <ResultScale>MB/s</ResultScale>
+    <ResultProportion>HIB</ResultProportion>
+    <ArgumentsDescription>Average rx</ArgumentsDescription>
+  </ResultsParser>
+  <ResultsParser>
+    <OutputTemplate>
+{
+  rx_ratestrings: {
+    max_tx: #_RESULT_# KiB/s,
+  },
+}
+   </OutputTemplate>
+   <ResultAfterString>max_tx:</ResultAfterString>
+    <LineHint>KiB/s,</LineHint>
+    <DivideResultBy>1024</DivideResultBy>
+    <ResultScale>MB/s</ResultScale>
+    <ResultProportion>HIB</ResultProportion>
+    <ArgumentsDescription>Max tx</ArgumentsDescription>
+  </ResultsParser>
+  <ResultsParser>
+    <OutputTemplate>
+{
+  rx_ratestrings: {
+    max_tx: #_RESULT_# MiB/s,
+  },
+}
+   </OutputTemplate>
+   <ResultAfterString>max_tx:</ResultAfterString>
+    <LineHint>MiB/s,</LineHint>
+    <ResultScale>MB/s</ResultScale>
+    <ResultProportion>HIB</ResultProportion>
+    <ArgumentsDescription>Max tx</ArgumentsDescription>
+  </ResultsParser>
+  <ResultsParser>
+
+    <OutputTemplate>
+{
+  tx_ratestrings: {
+    max_tx: 526.54 KiB/s,
+    avg_tx: #_RESULT_# KiB/s,
+  },
+}
+   </OutputTemplate>
+   <ResultAfterString>avg_tx:</ResultAfterString>
+    <LineHint>KiB/s</LineHint>
+    <DivideResultBy>1024</DivideResultBy>
+    <ResultScale>MB/s</ResultScale>
+    <ResultProportion>HIB</ResultProportion>
+    <ArgumentsDescription>Average tx</ArgumentsDescription>
+  </ResultsParser>
+
+  <ResultsParser>
+    <OutputTemplate>
+{
+  tx_ratestrings: {
+    max_tx: 526.54 KiB/s,
+    avg_tx: #_RESULT_# MiB/s,
+  },
+}
+   </OutputTemplate>
+   <ResultAfterString>avg_tx:</ResultAfterString>
+    <LineHint>MiB/s,</LineHint>
+    <ResultScale>MB/s</ResultScale>
+    <ResultProportion>HIB</ResultProportion>
+    <ArgumentsDescription>Average tx</ArgumentsDescription>
+  </ResultsParser>
+</PhoronixTestSuite>
