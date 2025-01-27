@@ -55,7 +55,6 @@ generate_results() {
 }
 
 clean() {
-    rm -f "\$TRIGGER_FILE"
     rm -rf "\$LOG"
     rm -rf "\$RESULT"
 }
