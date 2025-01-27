@@ -59,7 +59,7 @@
           {
             'name': test_profile_name,
             'status': temp_status,
-            'args': test_profile_args,
+            'args': test_profile_args if test_profile_args is defined else {},
             'benchmark_test_run_id': benchmark_test_run_id
           }
         ]

@@ -29,7 +29,7 @@
   shell:
     cmd: >-
       TEST_RESULTS_NAME="{{ monitoring_test_run_id }}" MONITOR=all phoronix-test-suite batch-benchmark {{ test_profile_name }}
-  environment: "{{ test_profile_args }}"
+  environment: "{{ test_profile_args if test_profile_args is defined else {} }}"
   async: 9999999
   poll: 0
   register: temp_status
@@ -42,7 +42,7 @@
           {
             'name': test_profile_name,
             'status': temp_status,
-            'args': test_profile_args,
+            'args': test_profile_args if test_profile_args is defined else {},
             'monitoring_test_run_id': monitoring_test_run_id
           }
         ]
