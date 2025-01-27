@@ -81,6 +81,10 @@
     loop_control:
       loop_var: monitoring_item
     when: active_monitoring is defined
+  - name: remove stop waiting trigger file
+    file:
+      path: /tmp/stop_waiting
+      state: absent
 - name: End benchmarks on benchmarked machines
   become: true
   hosts: benchmarked_machines
