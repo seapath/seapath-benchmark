@@ -3,7 +3,7 @@ test_scenario:
   - type: monitoring
     test_profiles:
       - process_monitoring
-
+      - network_monitoring
   - type: benchmark
     test_profiles:
       - disk:
