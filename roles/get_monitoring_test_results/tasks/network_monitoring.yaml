@@ -1,10 +1,6 @@
 # Copyright (C) 2024 Savoir-faire Linux, Inc.
 # SPDX-License-Identifier: Apache-2.0
 ---
-- name: End up network_monitoring
-  file:
-    path: /tmp/stop_waiting
-    state: touch
 - name: Wait for network_monitoring to finish
   async_status:
     jid: "{{ monitoring_item.status.ansible_job_id }}"

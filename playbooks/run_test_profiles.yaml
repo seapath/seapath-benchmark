@@ -70,6 +70,10 @@
   hosts:
     - monitored_machines
   tasks:
+  - name: End up monitoring
+    file:
+      path: /tmp/stop_waiting
+      state: touch
   - name: Generate monitoring test-profiles results
     include_role:
       name: "get_monitoring_test_results"
