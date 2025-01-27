@@ -29,7 +29,7 @@
 - name: Check if {{ test_profile_name }} arguments exists in role vars
   set_fact:
     test_profile_exists: "{{ test_profile_name in vars and lookup('vars', test_profile_name) is defined }}"
-  when: test_profile_args is not defined
+  when: test_profile_args | length == 0
 - name: Set test-profile arguments from role vars
   set_fact:
     test_profile_args: "{{ test_profile_args | default({}) | combine({ item.key: item.value }) }}"

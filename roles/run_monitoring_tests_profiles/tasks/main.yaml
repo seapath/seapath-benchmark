@@ -5,6 +5,7 @@
   set_fact:
     active_monitoring: "{{ active_monitoring }}"
     test_profile_exists: false
+    test_profile_args:
 - name: Set test profile name variable
   set_fact:
     test_profile_name: "{{ (test_profile | list | first if test_profile is not string else test_profile) | trim }}"
@@ -21,7 +22,7 @@
 - name: Check if {{ test_profile_name }} arguments exists in role vars
   set_fact:
     test_profile_exists: "{{ test_profile_name in vars and lookup('vars', test_profile_name) is defined }}"
-  when: test_profile_args is not defined
+  when: test_profile_args is none
 - name: Set test-profile arguments from role vars
   set_fact:
     test_profile_args: "{{ test_profile_args | default({}) | combine({ item.key: item.value }) }}"
@@ -31,7 +32,7 @@
   shell:
     cmd: >-
       TEST_RESULTS_NAME="{{ monitoring_test_run_id }}" MONITOR=all phoronix-test-suite batch-benchmark {{ test_profile_name }}
-  environment: "{{ test_profile_args if test_profile_args is defined else {} }}"
+  environment: "{{ test_profile_args }}"
   async: 9999999
   poll: 0
   register: temp_status
@@ -44,7 +45,7 @@
           {
             'name': test_profile_name,
             'status': temp_status,
-            'args': test_profile_args if test_profile_args is defined else {},
+            'args': test_profile_args,
             'monitoring_test_run_id': monitoring_test_run_id
           }
         ]
