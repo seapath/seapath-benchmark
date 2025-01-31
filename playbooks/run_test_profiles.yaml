@@ -40,6 +40,10 @@
         mode: "{{ item[0].mode }}"
       loop: "{{ test_scenario.test_scenario|subelements('test_profiles') }}"
       when: item[0].type == 'monitoring'
+    - name: Sync start of monitoring
+      file:
+        path: /tmp/start_monitoring
+        state: touch
 
 - name: Start benchmark test-profiles
   become: true
@@ -84,6 +88,10 @@
   - name: remove stop waiting trigger file
     file:
       path: /tmp/stop_waiting
+      state: absent
+  - name: remove start monitoring trigger file
+    file:
+      path: /tmp/start_monitoring
       state: absent
 - name: End benchmarks on benchmarked machines
   become: true
