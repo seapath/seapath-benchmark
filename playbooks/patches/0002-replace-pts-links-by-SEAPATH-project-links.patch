@@ -1,0 +1,26 @@
+diff --git a/pts-core/objects/pts_pdf_template.php b/pts-core/objects/pts_pdf_template.php
+index aec0de17b..7c47515c3 100644
+--- a/pts-core/objects/pts_pdf_template.php
++++ b/pts-core/objects/pts_pdf_template.php
+@@ -226,7 +226,7 @@ class pts_pdf_template extends FPDF
+ 		$this->SetFont('Arial', 'B', 7);
+ 		$this->SetTextColor(0, 0, 0);
+ 		$this->Cell(0, 0, pts_core::program_title(), 0, 0, 'L');
+-		$this->Cell(0, 0, 'www.phoronix-test-suite.com', 0, 0, 'R', true, 'http://www.phoronix-test-suite.com/');
++		$this->Cell(0, 0, 'lfenergy.org/projects/seapath/', 0, 0, 'R', true, 'http://www.lfenergy.org/projects/seapath/');
+ 	}
+ 	public function WriteBigHeaderCenter($Header)
+ 	{
+diff --git a/pts-core/objects/pts_result_file_output.php b/pts-core/objects/pts_result_file_output.php
+index 5c8588f9b..f1c5be5ba 100644
+--- a/pts-core/objects/pts_result_file_output.php
++++ b/pts-core/objects/pts_result_file_output.php
+@@ -933,7 +933,7 @@ class pts_result_file_output
+ 		$pdf->AddPage();
+ 		$pdf->Image(PTS_CORE_STATIC_PATH . 'images/pts-308x160.png', 69, 85, 73, 22);
+ 		$pdf->Ln(120);
+-		$pdf->WriteStatementCenter('www.phoronix-test-suite.com');
++		$pdf->WriteStatementCenter('https://lfenergy.org/projects/seapath/');
+ 		$pdf->Ln(15);
+ 		$pdf->WriteBigHeaderCenter($result_file->get_title());
+ 		$pdf->WriteText($result_file->get_description());

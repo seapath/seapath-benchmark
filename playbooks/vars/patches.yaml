@@ -2,3 +2,5 @@
 patches:
   - name: 0001-force-use-of-rsvg-convert-for-SVG-PNG-conversion.patch
     basedir: /usr/share/phoronix-test-suite
+  - name: 0002-replace-pts-links-by-SEAPATH-project-links.patch
+    basedir: /usr/share/phoronix-test-suite
