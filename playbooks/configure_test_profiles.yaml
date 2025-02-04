@@ -27,6 +27,13 @@
         ignore_whitespace: true
       loop: "{{ patches }}"
       when: patches is defined
+    - name: Replace pts logo by SEAPATH logo
+      copy:
+        src: ../files/images/seapath.png
+        dest: "{{ item }}"
+      with_items:
+      - "/usr/share/phoronix-test-suite/pts-core/static/images/pts-158x82.png"
+      - "/usr/share/phoronix-test-suite/pts-core/static/images/pts-308x160.png"
     - name: Copy phoronix configuration file
       copy:
         src: ../files/configuration/phoronix-test-suite.xml
