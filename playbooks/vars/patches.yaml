@@ -4,3 +4,5 @@ patches:
     basedir: /usr/share/phoronix-test-suite
   - name: 0002-replace-pts-links-by-SEAPATH-project-links.patch
     basedir: /usr/share/phoronix-test-suite
+  - name: 0003-replace-pts-images-by-SEAPATH-logo.patch
+    basedir: /usr/share/phoronix-test-suite
