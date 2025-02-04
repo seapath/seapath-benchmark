@@ -1,4 +1,4 @@
 ---
 patches:
   - name: 0001-force-use-of-rsvg-convert-for-SVG-PNG-conversion.patch
-    file: /usr/share/phoronix-test-suite/pts-core/objects/pts_svg_dom_gd.php
+    basedir: /usr/share/phoronix-test-suite
