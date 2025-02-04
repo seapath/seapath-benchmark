@@ -6,3 +6,5 @@ patches:
     basedir: /usr/share/phoronix-test-suite
   - name: 0003-replace-pts-images-by-SEAPATH-logo.patch
     basedir: /usr/share/phoronix-test-suite
+  - name: 0004-replace-pts-version-by-SEAPATH-version.patch
+    basedir: /usr/share/phoronix-test-suite

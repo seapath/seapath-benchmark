@@ -1,0 +1,13 @@
+diff --git a/pts-core/pts-core.php b/pts-core/pts-core.php
+index cbb2e50ea..a1df08cbc 100644
+--- a/pts-core/pts-core.php
++++ b/pts-core/pts-core.php
+@@ -85,7 +85,7 @@ class pts_core
+ 	public static function program_title()
+ 	{
+ 		// First argument was originally $show_codename, but no longer used/honored
+-		return 'Phoronix Test Suite v' . PTS_VERSION;
++		return 'SEAPATH v1.0';
+ 	}
+ }
+ function pts_define($name, $value = null)
