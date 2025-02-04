@@ -22,7 +22,8 @@
     - name: Apply needed patches
       patch:
         src: "patches/{{ item.name }}"
-        dest: "{{ item.file }}"
+        basedir: "{{ item.basedir }}"
+        strip: 1
         ignore_whitespace: true
       loop: "{{ patches }}"
       when: patches is defined
