@@ -1,0 +1,29 @@
+diff --git a/pts-core/objects/pts_pdf_template.php b/pts-core/objects/pts_pdf_template.php
+index 4931b69ad..aec0de17b 100644
+--- a/pts-core/objects/pts_pdf_template.php
++++ b/pts-core/objects/pts_pdf_template.php
+@@ -198,9 +198,9 @@ class pts_pdf_template extends FPDF
+                        return;
+                }
+
+-               if(is_file(PTS_CORE_STATIC_PATH . 'images/pts-158x82.jpg'))
++               if(is_file(PTS_CORE_STATIC_PATH . 'images/pts-158x82.png'))
+                {
+-                       $this->Image(PTS_CORE_STATIC_PATH . 'images/pts-158x82.jpg', 10, 8, 30);
++                       $this->Image(PTS_CORE_STATIC_PATH . 'images/pts-158x82.png', 10, 8, 30);
+                }
+                $this->SetFont('Arial', 'B', (isset($this->pts_title[50]) ? 10 : 14));
+                $this->SetTextColor(0, 0, 0);
+diff --git a/pts-core/objects/pts_result_file_output.php b/pts-core/objects/pts_result_file_output.php
+index 9dc7ae793..5c8588f9b 100644
+--- a/pts-core/objects/pts_result_file_output.php
++++ b/pts-core/objects/pts_result_file_output.php
+@@ -931,7 +931,7 @@ class pts_result_file_output
+                $pdf = new pts_pdf_template($result_file->get_title(), null);
+
+                $pdf->AddPage();
+-               $pdf->Image(PTS_CORE_STATIC_PATH . 'images/pts-308x160.png', 69, 85, 73, 38);
++               $pdf->Image(PTS_CORE_STATIC_PATH . 'images/pts-308x160.png', 69, 85, 73, 22);
+                $pdf->Ln(120);
+                $pdf->WriteStatementCenter('www.phoronix-test-suite.com');
+                $pdf->Ln(15);
