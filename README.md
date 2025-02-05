@@ -163,6 +163,29 @@ overwritten in the test scenario.
 
 ## Release notes
 
+### Version v0.4
+General:
+  * Various fixes and improvements
+  * Add idle and disk test scenario
+  * Add support of multiple arguments for test profiles
+  * For all test profiles, monitor all the hardware sensors available
+  * Customize generated reports with SEAPATH logo and project link
+
+Process_monitoring:
+  * Monitor the threads, in addition of the processes
+
+Rttests:
+  * Remove PTS package dependency
+
+Disk:
+  * Disable FIO cache, as it do not represent the real disk bandwidth
+  * Reduce numjob to 1
+  * Fix an issue where generated FIO files where not deleted
+
+Network_monitoring:
+  * Add test profile
+
+
 ### Version v0.3
 General:
   * Various bug fixes and improvements
@@ -174,11 +197,7 @@ General:
 Process_monitoring:
   * Fix an issue where pie charts were not displaying in PDF report
 
-Rttests:
-  * Fix an issue where test profile was running infinitely
 
-cpu:
-  * Add `time_to_run` parameter
 
 ### Version v0.2
 
