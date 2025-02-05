@@ -58,10 +58,12 @@ called `test profiles`. Test profiles can be one of two types:
 | Name | Test profiles type | Tested components | Compatible machines and infrastructure | Test arguments | Generated results | Needed dependencies |
 | -------- | ------- | ------- | ------- | ------- | ------- | ------- |
 | cpu | Benchmark | CPU | Hypervisor and VMs, all SEAPATH configuration | - `time_to_run`: duration of the test (default 60s) | PDF report with sysbench score | sysbench |
-| disk | Benchmark | Disk | Hypervisor and VMs, all SEAPATH configuration | - `time_to_run`: duration of the test (default 60s) | PDF report with fio score | fio |
+| disk | Benchmark | Disk | Hypervisor and VMs, all SEAPATH configuration | - `time_to_run`: duration of the test (default 60s) <br> - `size`: size of data to be wrote (default 1M) <br> By default, the test uses the time based option. | PDF report with fio score | fio |
 | vm_migration | Benchmark | CPU, disk | Hypervisor and VMs, only SEAPATH cluster configuration |- `resource`: name of the VM to migrate (default `guest0`) <br> - `iterations`: number of VM migration (default 5) | PDF report with average VM migration time | A working SEAPATH cluster using crm as resource manager |
 | rt_tests | Benchmark | / | Hypervisor and VMs, all SEAPATH configuration | / | PDF report with average latency in ms | cyclictest |
-| process_monitoring | Monitoring | / | Hypervisor and VMs, all SEAPATH configuration | `processes_to_monitor`: list of processes to monitor separated by a coma `,`. If not provided, only shows the three most CPU consumer processes | HTML report with process CPU consumption per CPU core | / |
+| idle | Benchmark | CPU | Hypervisor and VMs, all SEAPATH configuration | - `time_to_run`: duration of the test (default 60s) | / | / |
+| process_monitoring | Monitoring | / | Hypervisor and VMs, all SEAPATH configuration | `processes_to_monitor`: list of processes to monitor separated by a coma `,`. If not provided, only shows the three most CPU consumer processes | PDF report with process CPU consumption per CPU core | / |
+| network_monitoring | Monitoring | / | Hypervisor and VMs, all SEAPATH configuration | `interface`: network interface to be monitored (default `team0`) | PDF report with average and max bandwidth for RX and TX | vnstat |
 
 Test-profiles are run in `test scenarios`. Each test scenario describes
 what tests have to be run, with which parameters, and which
@@ -74,7 +76,8 @@ vars/test_scenarios directory.
 | -------- | ------- | ------- |
 | disk_cpu_rttest.yaml | Disk, CPU and RT tests run simultaneously, process_monitoring monitoring | Disk and CPU test profiles: 120s test |
 | vmmigration.yaml | 5 iterations of VM migration | VM migration test profile: `5` iterations of `guest0` VM <br> `processes_to_monitor`: `crm` and `qemu-system-x86` processes
-
+| disk.yaml | Disk test, with process_monitoring and network_monitoring monitoring | `size`: `1G` |
+| idle.yaml | Idle test with process_monitoring monitoring | `time_to_run`: `1800` |
 
 ## Installation
 ### Requirements
