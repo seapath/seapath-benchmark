@@ -1,0 +1,10 @@
+---
+test_scenario:
+  - type: monitoring
+    test_profiles:
+      - process_monitoring
+  - type: benchmark
+    test_profiles:
+      - rt_tests:
+          time_to_run: 5
+    mode: parallel
