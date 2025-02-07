@@ -11,3 +11,7 @@ vm_migration:
   iterations: 5
 cpu:
   time: 60
+rt_tests:
+  time_to_run:
+    menu_entry: 1
+    default_value: 60
