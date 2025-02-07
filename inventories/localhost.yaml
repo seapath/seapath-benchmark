@@ -1,0 +1,16 @@
+---
+# This inventory is used for running seapath-benchmark in localhost,
+# for CI purpose.
+all:
+    hosts:
+        localhost:
+            ansible_connection: local
+            ansible_user: ubuntu
+            ansible_python_interpreter: "{{ansible_playbook_python}}"
+    children:
+        monitored_machines:
+            hosts:
+                localhost:
+        benchmarked_machines:
+            hosts:
+                localhost:

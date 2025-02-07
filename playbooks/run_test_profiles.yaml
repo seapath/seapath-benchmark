@@ -23,7 +23,7 @@
         cmd: >-
           date +%F-%Hh%Mm%S
       register: test_start_time
-    - name: Load scenario
+    - name: Load scenario {{ test_scenario_name }}
       include_vars:
         file: "../vars/test_scenarios/{{ test_scenario_name }}.yaml"
         name: test_scenario

@@ -6,9 +6,7 @@ test_scenario:
       - network_monitoring
   - type: benchmark
     test_profiles:
-      - disk:
-          time_to_run: 120
-      - cpu:
-          time_to_run: 120
+      - disk
+      - cpu
       - rt_tests
     mode: parallel
