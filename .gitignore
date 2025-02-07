@@ -1,5 +1,7 @@
 *.pdf
 inventories/*.yaml
 !inventories/inventory_example.yaml
+!inventories/localhost.yaml
 .vscode/
 tests_results*/
+.ansible/
