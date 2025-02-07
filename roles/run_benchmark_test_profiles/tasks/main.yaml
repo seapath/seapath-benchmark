@@ -22,18 +22,17 @@
   loop: "{{ lookup('vars', test_profile_name, wantlist=True) }}"
   loop_control:
     loop_var: arg
-  when: arg[test_profile_args|first]['menu_entry'] is defined
+  when: test_profile_args is not none and arg[test_profile_args|first]['menu_entry'] is defined
 - name: Set test-profile run identifier
   set_fact:
     benchmark_test_run_id: "{{ test_profile_name | replace('_', '') }}-{{ test_start_time.stdout }}"
 - name: Check if {{ test_profile_name }} arguments exists in role vars
   set_fact:
     test_profile_exists: "{{ test_profile_name in vars and lookup('vars', test_profile_name) is defined }}"
-  when: test_profile_args | length == 0
+  when: test_profile_args is none
 - name: Set test-profile arguments from role vars
   set_fact:
-    test_profile_args: "{{ test_profile_args | default({}) | combine({ item.key: item.value }) }}"
-  with_dict: "{{ lookup('vars', test_profile_name) }}"
+    test_profile_args: "{{ test_profile_args | default({}) | combine({ (lookup('vars', test_profile_name) | dict2items | first).key: (lookup('vars', test_profile_name) | dict2items | first).value['default_value'] }) }}"
   when: test_profile_exists|bool == true
 - name: Run {{ test_profile_name }} benchmark in parallel mode
   shell:
