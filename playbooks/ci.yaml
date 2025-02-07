@@ -1,0 +1,19 @@
+---
+- name: Test configure_test_profiles playbook
+  import_playbook: configure_test_profiles.yaml
+- name: Test run_test_profiles playbook
+  import_playbook: run_test_profiles.yaml
+  vars:
+    test_scenario_name: ci/disk_cpu_rttest_no_args_parallel
+- name: Test run_test_profiles playbook
+  import_playbook: run_test_profiles.yaml
+  vars:
+    test_scenario_name: ci/disk_cpu_rttest_no_args_sequential
+- name: Test run_test_profiles playbook
+  import_playbook: run_test_profiles.yaml
+  vars:
+    test_scenario_name: ci/disk_cpu_rttest_args_parallel
+- name: Test run_test_profiles playbook
+  import_playbook: run_test_profiles.yaml
+  vars:
+    test_scenario_name: ci/disk_cpu_rttest_args_sequential

@@ -2,7 +2,7 @@
 disk:
   time_to_run:
     menu_entry: 1
-    default_value: 60
+    default_value: 10
   size:
     menu_entry: 2
     default_value: 10M
@@ -15,4 +15,4 @@ cpu:
 rt_tests:
   time_to_run:
     menu_entry: 1
-    default_value: 60
+    default_value: 10

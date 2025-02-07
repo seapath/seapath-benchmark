@@ -7,8 +7,9 @@ test_scenario:
   - type: benchmark
     test_profiles:
       - disk:
-          time_to_run: 120
+          size: 10M
       - cpu:
-          time_to_run: 120
-      - rt_tests
-    mode: parallel
+          time_to_run: 30
+      - rt_tests:
+          time_to_run: 30
+    mode: sequential
