@@ -10,7 +10,8 @@ vm_migration:
   resource: guest0
   iterations: 5
 cpu:
-  time: 60
+  time_to_run:
+    default_value: 10
 rt_tests:
   time_to_run:
     menu_entry: 1
