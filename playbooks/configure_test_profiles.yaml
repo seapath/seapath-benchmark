@@ -52,6 +52,11 @@
         dest: /usr/bin/generate_pie_chart
       - src: ../files/generate_pie_chart_xml.awk
         dest: /usr/bin/generate_pie_chart_xml.awk
+    - name: Copy cyclictest plot script
+      copy:
+        src: ../files/plot-cyclic-test-linear.sh
+        dest: /usr/bin/plot-cyclic-test-linear
+        mode: '0777'
     - name: Configure monitoring test-profiles
       include_role:
         name: "configure_test_profiles"
