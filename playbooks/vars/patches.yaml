@@ -8,3 +8,5 @@ patches:
     basedir: /usr/share/phoronix-test-suite
   - name: 0004-replace-pts-version-by-SEAPATH-version.patch
     basedir: /usr/share/phoronix-test-suite
+  - name: 0005-integrate-cylictest-plot-in-report.patch
+    basedir: /usr/share/phoronix-test-suite

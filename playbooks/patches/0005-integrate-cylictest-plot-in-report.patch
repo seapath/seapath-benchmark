@@ -1,0 +1,65 @@
+diff --git a/pts-core/objects/pts_Graph/pts_graph_cyclictest_plot.php b/pts-core/objects/pts_Graph/pts_graph_cyclictest_plot.php
+new file mode 100644
+index 000000000..eeb27d9de
+--- /dev/null
++++ b/pts-core/objects/pts_Graph/pts_graph_cyclictest_plot.php
+@@ -0,0 +1,45 @@
++<?php
++/*
++        Copyright (C) 2025 Savoir-faire Linux, Inc.
++
++        This program is free software; you can redistribute it and/or modify
++        it under the terms of the GNU General Public License as published by
++        the Free Software Foundation; either version 3 of the License, or
++        (at your option) any later version.
++
++        This program is distributed in the hope that it will be useful,
++        but WITHOUT ANY WARRANTY; without even the implied warranty of
++        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++        GNU General Public License for more details.
++
++        You should have received a copy of the GNU General Public License
++        along with this program. If not, see <http://www.gnu.org/licenses/>.
++*/
++
++class pts_graph_cyclictest_plot extends pts_graph_core{
++
++        public function __construct(&$result_object, &$result_file = null, $extra_attributes = null)
++        {
++                parent::__construct($result_object, $result_file, $extra_attributes);
++
++				$test_results_path = "/var/lib/phoronix-test-suite/test-results/";
++				$test_run_dir = $result_file->get_title();
++				$test_run_hash = $result_object->get_comparison_hash(true, false);
++				$test_run_file = $result_file->get_test_run_log_for_result($result_object,false)[0];
++
++				$test_run_file = trim(str_replace(' ', "\ ", $test_run_file));
++				$full_test_run_path = $test_results_path . $test_run_dir . "/test-logs" . "/" . $test_run_hash . "/" . $test_run_file;
++				shell_exec('plot-cyclic-test-linear -i ' . $full_test_run_path . " -o " . "/tmp/pts_cyclictest_results");
++        }
++
++        public function render_graph_init(){
++            $this->update_graph_dimensions();
++            $this->svg_dom = new pts_svg_dom(640, 480);
++        }
++
++		public function renderGraph(){
++			$this->render_graph_init();
++
++			$this->svg_dom->add_element('image', array('xlink:href' => '/tmp/pts_cyclictest_results','width' => 640, 'height' => 480,'x' => 0, 'y' => 0 ));
++        }
++    }
+diff --git a/pts-core/objects/pts_render.php b/pts-core/objects/pts_render.php
+index 41072159f..9d7493ded 100644
+--- a/pts-core/objects/pts_render.php
++++ b/pts-core/objects/pts_render.php
+@@ -283,6 +283,9 @@ class pts_render
+ 			case 'SCATTER_PLOT':
+ 				$graph = new pts_graph_scatter_plot($result_object, $result_file, $extra_attributes);
+ 				break;
++			case 'CYCLICTEST_PLOT':
++				$graph = new pts_graph_cyclictest_plot($result_object, $result_file, $extra_attributes);
++				break;
+ 			default:
+ 				if($horizontal_bars)
+ 				{
