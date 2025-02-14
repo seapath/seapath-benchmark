@@ -8,6 +8,7 @@
     <ResultScale>ms Average</ResultScale>
     <Proportion>LIB</Proportion>
     <TimesToRun>1</TimesToRun>
+    <DisplayFormat>CYCLICTEST_PLOT</DisplayFormat>
   </TestInformation>
   <TestProfile>
     <Version>1.0.0</Version>
@@ -36,6 +37,10 @@
         <Entry>
           <Name>clock_nanosleep TIME_ABSTIME, Interval 10000 ms, 10000 Loops</Name>
           <Value>-t1 -p 80 -i 10000 -l 10000</Value>
+        </Entry>
+        <Entry>
+          <Name>Reference test</Name>
+          <Value>-l100000000 -m -Sp90 -i200 -h400 -q</Value>
         </Entry>
       </Menu>
     </Option>

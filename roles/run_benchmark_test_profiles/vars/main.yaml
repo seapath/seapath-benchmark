@@ -16,3 +16,5 @@ rt_tests:
   time_to_run:
     menu_entry: 1
     default_value: 10
+  reference_test:
+    menu_entry: 3
