@@ -1,0 +1,18 @@
+diff --git a/pts-core/objects/pts_result_file_output.php b/pts-core/objects/pts_result_file_output.php
+index 679a893b7..111da260b 100644
+--- a/pts-core/objects/pts_result_file_output.php
++++ b/pts-core/objects/pts_result_file_output.php
+@@ -1000,8 +1000,13 @@ class pts_result_file_output
+ 		$table_data_hints = array();
+ 		$row = 0;
+ 		$last_test_profile = null;
++		$arguments_printed_once = false;
+ 		foreach($result_file->get_result_objects() as $ro)
+ 		{
++			if($print_used_arguments == false){
++				$pdf->WriteText("Used arguments: " . $ro->get_arguments());
++				$arguments_printed_once = true;
++			}
+ 			if($ro->test_profile->get_display_format() != 'BAR_GRAPH' || $ro->test_result_buffer->get_max_value() == null)
+ 			{
+ 				continue;
