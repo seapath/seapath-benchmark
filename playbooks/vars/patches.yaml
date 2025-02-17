@@ -10,3 +10,5 @@ patches:
     basedir: /usr/share/phoronix-test-suite
   - name: 0005-integrate-cylictest-plot-in-report.patch
     basedir: /usr/share/phoronix-test-suite
+  - name: 0006-integrate-used-arguments.patch
+    basedir: /usr/share/phoronix-test-suite
