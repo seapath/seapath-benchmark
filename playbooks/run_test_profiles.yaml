@@ -18,6 +18,10 @@
   vars:
     - test_scenario_name: disk_cpu_rttest
   tasks:
+    - name: Clean previous PTS instances
+      shell:
+        cmd: >-
+          pkill php || true
     - name: Record test start time
       shell:
         cmd: >-
