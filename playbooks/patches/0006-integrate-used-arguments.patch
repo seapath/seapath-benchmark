@@ -9,7 +9,7 @@ index 679a893b7..111da260b 100644
 +		$arguments_printed_once = false;
  		foreach($result_file->get_result_objects() as $ro)
  		{
-+			if($print_used_arguments == false){
++			if($arguments_printed_once == false){
 +				$pdf->WriteText("Used arguments: " . $ro->get_arguments());
 +				$arguments_printed_once = true;
 +			}
