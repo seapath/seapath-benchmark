@@ -3,3 +3,4 @@ dependencies:
   - patch
   - phoronix-test-suite
   - rsvg-convert
+  - gnuplot
