@@ -164,6 +164,24 @@ overwritten in the test scenario.
 
 ## Release notes
 
+### Version v0.5
+General:
+  * Fix incorrect test arguments retrieve
+  * Add a test playbook used to test seapath-benchmark in a CI
+  * Add the ability to run in localhost, using `cqfd -b ci`
+  * Install plot-cyclic-test-linear on target, used to plot cyclictest
+    results
+  * Add rttest_cpu test scenario
+  * Display used test profiles arguments in generated report
+  * Clean previous PTS processes in case of aborted tests
+
+Rttests:
+  * Add `reference_test` argument, used to run SEAPATH reference RT
+    latency test
+  * Add `time_to_run` argument, used to run cyclictest time based test
+  * Integrate cyclictest plot into generated PDF report
+
+
 ### Version v0.4
 General:
   * Various fixes and improvements
