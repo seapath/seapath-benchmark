@@ -22,6 +22,12 @@
       shell:
         cmd: >-
           pkill php || true
+    - name: Ensure trigger files are absent
+      file:
+        path:
+          - /tmp/stop_waiting
+          - /tmp/start_monitoring
+        state: absent
     - name: Record test start time
       shell:
         cmd: >-
