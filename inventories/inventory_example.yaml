@@ -1,12 +1,5 @@
 ---
 all:
-    ansible_user: root
-    ansible_python_interpreter: /usr/bin/python3
-    ansible_ssh_private_key_file: ~/.ssh/my-ssh-key
-    ansible_ssh_common_args: '-o StrictHostKeyChecking=no -o IdentitiesOnly=yes'
-    ansible_connection: ssh
-    admin_user: admin
-
     hosts:
         hypervisor1:
             ansible_host: 192.168.1.125
@@ -14,7 +7,13 @@ all:
             ansible_host: 192.168.1.126
         VM1:
             ansible_host: 192.168.1.127
-
+    vars:
+            ansible_user: root
+            ansible_python_interpreter: /usr/bin/python3
+            ansible_ssh_private_key_file: ~/.ssh/my-ssh-key
+            ansible_ssh_common_args: '-o StrictHostKeyChecking=no -o IdentitiesOnly=yes'
+            ansible_connection: ssh
+            admin_user: admin
     children:
         # monitored_machines group defines which host are monitored in
         # the test scenario.
