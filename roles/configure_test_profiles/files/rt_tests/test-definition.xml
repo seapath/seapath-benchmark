@@ -32,11 +32,11 @@
       <Menu>
         <Entry>
           <Name>Time based</Name>
-          <Value>-D $time_to_run</Value>
+          <Value>-D $time_to_run -h400</Value>
         </Entry>
         <Entry>
           <Name>clock_nanosleep TIME_ABSTIME, Interval 10000 ms, 10000 Loops</Name>
-          <Value>-t1 -p 80 -i 10000 -l 10000</Value>
+          <Value>-t1 -p 80 -i 10000 -l 10000 -h400</Value>
         </Entry>
         <Entry>
           <Name>Reference test</Name>
