@@ -1,6 +1,7 @@
 # Copyright (C) 2024 Savoir-faire Linux, Inc.
 # SPDX-License-Identifier: Apache-2.0
 FROM ubuntu:24.04
+RUN userdel -r ubuntu
 
 ENV DEBIAN_FRONTEND=noninteractive
 
