@@ -6,5 +6,5 @@ test_scenario:
   - type: benchmark
     test_profiles:
       - rt_tests:
-          time_to_run: 5
+          reference_test:
     mode: parallel
