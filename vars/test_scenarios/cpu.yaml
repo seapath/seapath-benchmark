@@ -1,0 +1,6 @@
+test_scenario:
+  - type: benchmark
+    test_profiles:
+      - cpu:
+          time_to_run: 20000
+    mode: parallel
