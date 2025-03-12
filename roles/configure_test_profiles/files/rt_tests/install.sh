@@ -12,8 +12,13 @@ else
 	echo 2 > ~/install-exit-status
 fi
 
-echo "#!/bin/bash
-	cyclictest \$@ > \$LOG_FILE 2>&1" > rt_tests
+cat << 'EOF' > rt_tests
+#!/bin/bash
+cyclictest $@ > $LOG_FILE 2>&1
+MAX_LATENCIES=$(grep "Max Latencies" "$LOG_FILE" | tr " " "\n" | sort -n | tail -1 | sed s/^0*//)
+echo "Max Latency: $MAX_LATENCIES" >> $LOG_FILE
+EOF
+
 chmod +x rt_tests
 
 # Check out the `phoronix-test-suite debug-run` command when trying to
