@@ -34,6 +34,10 @@
   set_fact:
     test_profile_args: "{{ test_profile_args | default({}) | combine({ (lookup('vars', test_profile_name) | dict2items | first).key: (lookup('vars', test_profile_name) | dict2items | first).value['default_value'] }) }}"
   when: test_profile_exists|bool == true
+- name: Check if test threshold is defined
+  set_fact:
+    threshold: "{{ test_profile.threshold }}"
+  when: test_profile.threshold is defined
 - name: Run {{ test_profile_name }} benchmark in parallel mode
   shell:
     cmd: >-
@@ -59,6 +63,7 @@
             'name': test_profile_name,
             'status': temp_status,
             'args': test_profile_args if test_profile_args is defined else {},
+            'threshold': threshold if threshold is defined else {},
             'benchmark_test_run_id': benchmark_test_run_id
           }
         ]
