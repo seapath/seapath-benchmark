@@ -5,7 +5,7 @@
     <Title>Cyclictest</Title>
     <AppVersion>0.84</AppVersion>
     <Description>Cyclictest is a high-resolution test program for measuring the Linux kernel latencies.</Description>
-    <ResultScale>ms Average</ResultScale>
+    <ResultScale>ms Max</ResultScale>
     <Proportion>LIB</Proportion>
     <TimesToRun>1</TimesToRun>
     <DisplayFormat>CYCLICTEST_PLOT</DisplayFormat>
@@ -40,7 +40,7 @@
         </Entry>
         <Entry>
           <Name>Reference test</Name>
-          <Value>-l100000000 -m -Sp90 -i200 -h400 -q</Value>
+          <Value>-l100 -m -Sp90 -i200 -h400 -q</Value>
         </Entry>
       </Menu>
     </Option>

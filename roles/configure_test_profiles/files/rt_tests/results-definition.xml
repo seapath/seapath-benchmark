@@ -2,7 +2,7 @@
 <!--Phoronix Test Suite v4.2.0m2 (Randaberg)-->
 <PhoronixTestSuite>
   <ResultsParser>
-    <OutputTemplate># Avg Latencies: #_RESULT_# 00003 00003 00003 00003 00003 00003 00003 00003 00003 00003 00003 00003 00003 00003 00004 00003 00003 00003 00003</OutputTemplate>
-    <ResultAfterString>Latencies:</ResultAfterString>
+    <OutputTemplate>Max Latency: #_RESULT_#</OutputTemplate>
+    <ResultAfterString>Latency:</ResultAfterString>
   </ResultsParser>
 </PhoronixTestSuite>
