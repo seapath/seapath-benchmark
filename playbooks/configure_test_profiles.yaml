@@ -63,3 +63,8 @@
       vars:
         test_profile_name: "{{ item }}"
       loop: "{{ test_profiles }}"
+    - name: Copy PTS modules
+      copy:
+        src: "../files/phoronix-test-suite/modules/threshold.php"
+        dest: "/usr/share/phoronix-test-suite/pts-core/modules/threshold.php"
+        mode: '0777'
