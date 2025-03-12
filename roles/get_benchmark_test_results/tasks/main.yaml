@@ -1,4 +1,9 @@
 ---
+- name: Append threshold test
+  shell:
+    cmd: >-
+      phoronix-test-suite threshold.add {{ benchmark_item['benchmark_test_run_id'] }} {{ benchmark_item['threshold'] }}
+  when: benchmark_item['threshold'] != {}
 - name: Generate test results PDF
   shell:
     cmd: >-
